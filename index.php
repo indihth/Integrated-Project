@@ -43,107 +43,122 @@ try {
 </head>
 
 <body>
+
+  <!-- navbar -->
+  <div class="header">
+    <a href="index.php"><h1>Culture News</h1></a>
+    <nav>
+      <ul class="nav-cont">
+        <li><a class="active nav-item" href="index.php">Home</a></li>
+        <li><a class="nav-item" href="#news">News</a></li>
+        <li><a class="nav-item" href="#news">Events</a></li>
+        <li><a class="nav-item" href="#news">Add Story</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
   <div class="container">
     <!-- Left - headline only stories -->
     <div class="width-3">
 
       <!-- 1st headline only category -->
       <div class="mb-1">
-      <div class="eventTag tag">
-        <p>Current Events</p>
-      </div>
+        <div class="eventTag tag">
+          <p>Current Events</p>
+        </div>
 
-      <?php foreach ($worldStories as $worldStory) {
-        $category = GET::byId('categories', $worldStory->category_id);
-        $author = GET::byId('authors', $worldStory->author_id);    ?>
-        <div class="story">
-          <!-- <div class="tag">
+        <?php foreach ($worldStories as $worldStory) {
+          $category = GET::byId('categories', $worldStory->category_id);
+          $author = GET::byId('authors', $worldStory->author_id);    ?>
+          <div class="story">
+            <!-- <div class="tag">
             <p><?= $category->name; ?></p>
           </div> -->
-          <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
-        </div>
-      <?php  } ?>
-    </div>
-    <!-- 2nd headline only category -->
-
-    <div class="mb-1">
-      <div class="eventTag tag">
-        <p>Upcoming Events</p>
+            <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
+            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+          </div>
+        <?php  } ?>
       </div>
+      <!-- 2nd headline only category -->
 
-      <!-- <div class="story">
+      <div class="mb-1">
+        <div class="eventTag tag">
+          <p>Upcoming Events</p>
+        </div>
+
+        <!-- <div class="story">
         <div class="tag">
           <p>Upcoming Events</p>
         </div>
         </div> -->
 
-      <?php foreach ($worldStories as $worldStory) {
-        $category = GET::byId('categories', $worldStory->category_id);
-        $author = GET::byId('authors', $worldStory->author_id);    ?>
-        <div class="story">
-          <!-- <div class="tag">
+        <?php foreach ($worldStories as $worldStory) {
+          $category = GET::byId('categories', $worldStory->category_id);
+          $author = GET::byId('authors', $worldStory->author_id);    ?>
+          <div class="story">
+            <!-- <div class="tag">
             <p><?= $category->name; ?></p>
           </div> -->
-          <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
-        </div>
+            <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
+            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+          </div>
 
-      <?php  } ?>
-    </div>
-  </div>
-  <!-- Middle - main stories -->
-  <div class="width-6">
-    <!-- main story -->
-    <?php
-    $category = GET::byId('categories', $headlineStories[0]->category_id);
-    $author = GET::byId('authors', $headlineStories[0]->author_id);
-    ?>
-
-    <div class="story">
-      <div class="tag">
-        <p><?= $category->name; ?></p>
+        <?php  } ?>
       </div>
-      <h1><a href="article.php?id=<?= $headlineStories[0]->id ?>"><?= $headlineStories[0]->headline; ?></a></h1>
-      <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $headlineStories[0]->date; ?></h5>
-      <p><?= substr($headlineStories[0]->main_story, 0, 500);
-          echo "...(read more)"; ?></p>
     </div>
+    <!-- Middle - main stories -->
+    <div class="width-6">
+      <!-- main story -->
+      <?php
+      $category = GET::byId('categories', $headlineStories[0]->category_id);
+      $author = GET::byId('authors', $headlineStories[0]->author_id);
+      ?>
 
-    <!-- substories -->
-    <?php foreach ($subStories as $subStory) {
-      $category = GET::byId('categories', $subStory->category_id);
-      $author = GET::byId('authors', $subStory->author_id);    ?>
       <div class="story">
         <div class="tag">
           <p><?= $category->name; ?></p>
         </div>
-        <h2><a href="article.php?id=<?= $subStory->id ?>"><?= $subStory->headline; ?></a></h2>
-        <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $subStory->date; ?></h5>
-        <p><?= substr($subStory->main_story, 0, 250);
+        <h1><a href="article.php?id=<?= $headlineStories[0]->id ?>"><?= $headlineStories[0]->headline; ?></a></h1>
+        <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $headlineStories[0]->date; ?></h5>
+        <p><?= substr($headlineStories[0]->main_story, 0, 500);
             echo "...(read more)"; ?></p>
       </div>
 
-    <?php  } ?>
-  </div>
-
-  <!-- Right - mini stories -->
-  <?php foreach ($cultureStories as $cultureStory) {
-    $category = GET::byId('categories', $cultureStory->category_id);
-    $author = GET::byId('authors', $cultureStory->author_id);    ?>
-
-    <div class="width-3">
-      <div class="story">
-        <div class="tag">
-          <p><span><?= $category->name; ?></span></p>
+      <!-- substories -->
+      <?php foreach ($subStories as $subStory) {
+        $category = GET::byId('categories', $subStory->category_id);
+        $author = GET::byId('authors', $subStory->author_id);    ?>
+        <div class="story">
+          <div class="tag">
+            <p><?= $category->name; ?></p>
+          </div>
+          <h2><a href="article.php?id=<?= $subStory->id ?>"><?= $subStory->headline; ?></a></h2>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $subStory->date; ?></h5>
+          <p><?= substr($subStory->main_story, 0, 250);
+              echo "...(read more)"; ?></p>
         </div>
-        <h3><a href="article.php?id=<?= $cultureStory->id ?>"><?= $cultureStory->short_headline; ?></a></h3>
-        <p><?= $cultureStory->summary; ?></p>
-        <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $cultureStory->date; ?></h5>
-      </div>
 
-    <?php  } ?>
+      <?php  } ?>
     </div>
+
+    <!-- Right - mini stories -->
+    <?php foreach ($cultureStories as $cultureStory) {
+      $category = GET::byId('categories', $cultureStory->category_id);
+      $author = GET::byId('authors', $cultureStory->author_id);    ?>
+
+      <div class="width-3">
+        <div class="story">
+          <div class="tag">
+            <p><span><?= $category->name; ?></span></p>
+          </div>
+          <h3><a href="article.php?id=<?= $cultureStory->id ?>"><?= $cultureStory->short_headline; ?></a></h3>
+          <p><?= $cultureStory->summary; ?></p>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $cultureStory->date; ?></h5>
+        </div>
+
+      <?php  } ?>
+      </div>
 </body>
 
 </html>

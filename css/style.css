@@ -2,11 +2,54 @@
 font-family: 'Playfair Display', serif;
 font-family: 'Raleway', sans-serif; */
 
+/* ////////////////////////////////// */
 /* UTILITIES */
+/* ////////////////////////////////// */
 .mb-1 {
     margin-bottom: 15px;
 }
-/* ............. */
+
+/* ////////////////////////////////// */
+/* NAVBAR */
+/* ////////////////////////////////// */
+
+.nav-cont {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* background-color: #ff7675; */
+}
+
+.nav-item {
+    font-family: 'EB Garamond', serif;
+    padding: .6em 1em;
+}
+
+li a:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.active {
+    background-color: #e9e9e9;
+} 
+
+/* ////////////////////////////////// */
+
+
+.header {
+    width: 1200px;
+    padding-top: 40px;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 60px;
+    padding-bottom: 5px;
+}
 
 body {
     background-color: white;
@@ -33,12 +76,15 @@ doesn't look right
 
 /* .topStory  */
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'EB Garamond', serif;
     line-height: 1.2em;
     color: #363636;
     text-transform: uppercase;
 }
+
 h1 {
     font-size: 40px;
     font-weight: 400;
@@ -83,7 +129,7 @@ h5 span {
     margin-top: 20px;
 }
 
-.story h3{
+.story h3 {
     margin-bottom: 4px;
 }
 
@@ -92,8 +138,8 @@ h5 span {
     /* margin-top: 20px; */
 }
 
-.heading span{
-    background: black;
+.heading span {
+    background: rgb(70, 70, 70);
     color: white;
     padding: 2px;
 
@@ -120,7 +166,7 @@ h5 span {
 }
 
 .tag span {
-    background: black;
+    background: #363636;
     color: white;
     padding: 1px 4px;
 }
@@ -128,16 +174,16 @@ h5 span {
 .eventTag {
     padding: 10px 40px 0px 0px;
     margin: 11px 0 15px 0;
-    border-bottom: 1px solid #949494; 
+    border-bottom: 1px solid #949494;
     /* border-bottom: 1px solid #D1D1D1;  */
     /* padding: 5px 20px 15px 0px;
     margin-top: 15px;  */
 }
 
-.eventTag p { 
+.eventTag p {
     /* background: black;
     color: white; */
-    font-size: 14px;
+    font-size: 12px;
     padding: 4px 2px;
 }
 
@@ -146,7 +192,7 @@ h5 span {
 }
 
 .viewArticle p {
-    font-family: 'Raleway', sans-serif; 
+    font-family: 'Raleway', sans-serif;
     font-size: 14px;
     margin-bottom: 15px;
 }

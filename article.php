@@ -43,6 +43,19 @@ try {
 </head>
 
 <body>
+  <!-- navbar -->
+  <div class="header">
+    <a href="index.php"><h1>Culture News</h1></a>
+    <nav>
+      <ul class="nav-cont">
+        <li><a class="active nav-item" href="index.php">Home</a></li>
+        <li><a class="nav-item" href="#news">News</a></li>
+        <li><a class="nav-item" href="#news">Events</a></li>
+        <li><a class="nav-item" href="#news">Add Story</a></li>
+      </ul>
+    </nav>
+  </div>
+
   <div class="container">
     <div class="width-8">
       <!-- main story -->
@@ -57,7 +70,7 @@ try {
         </div>
 
         <div class="width-6 viewArticle">
-          <?= $story->main_story ?>
+          <p><?= $story->main_story ?></p>
         </div>
       </div>
     </div>
