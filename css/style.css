@@ -1,0 +1,152 @@
+/* font-family: 'EB Garamond', serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Raleway', sans-serif; */
+
+/* UTILITIES */
+.mb-1 {
+    margin-bottom: 15px;
+}
+/* ............. */
+
+body {
+    background-color: white;
+}
+
+p {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8em;
+    color: #363636;
+    margin: 10px 0px 10px 0px;
+}
+
+
+/* having so much space between the name and date 
+doesn't look right
+
+.creditLine {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+} */
+
+/* .topStory  */
+
+h1, h2, h3 {
+    font-family: 'EB Garamond', serif;
+    line-height: 1.2em;
+    color: #363636;
+    text-transform: uppercase;
+}
+h1 {
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    line-height: 1em;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+h5 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.8em;
+    color: #7c7c7c;
+    margin: 0px;
+}
+
+h5 span {
+    font-weight: 700;
+}
+
+.story {
+    border-bottom: 1px solid #D1D1D1;
+    padding: 0px 20px 20px 0px;
+    margin-top: 20px;
+}
+
+.story:last-of-type {
+    border-bottom: none;
+    padding: 0px 20px 20px 0px;
+    margin-top: 20px;
+}
+
+.story h3{
+    margin-bottom: 4px;
+}
+
+.tag {
+    padding: 5px 20px 4px 0px;
+    /* margin-top: 20px; */
+}
+
+.heading span{
+    background: black;
+    color: white;
+    padding: 2px;
+
+    /* color: #5A5A5A;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 0px;
+    line-height: 12px;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #D1D1D1; */
+}
+
+.tag p {
+    color: #5A5A5A;
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 2px;
+    font-weight: 500;
+    margin: 0px;
+    line-height: 12px;
+    text-transform: lowercase;
+}
+
+.tag span {
+    background: black;
+    color: white;
+    padding: 1px 4px;
+}
+
+.eventTag {
+    padding: 10px 40px 0px 0px;
+    margin: 11px 0 15px 0;
+    border-bottom: 1px solid #949494; 
+    /* border-bottom: 1px solid #D1D1D1;  */
+    /* padding: 5px 20px 15px 0px;
+    margin-top: 15px;  */
+}
+
+.eventTag p { 
+    /* background: black;
+    color: white; */
+    font-size: 14px;
+    padding: 4px 2px;
+}
+
+.viewArticle h1 {
+    font-size: 38px;
+}
+
+.viewArticle p {
+    font-family: 'Raleway', sans-serif; 
+    font-size: 14px;
+    margin-bottom: 15px;
+}
