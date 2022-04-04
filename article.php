@@ -73,6 +73,8 @@ try {
           <p><?= $story->main_story ?></p>
         </div>
       </div>
+
+      <a href="update_story_form.php?id=<?= $story->id; ?>">Update</a>
     </div>
 
     <div class="width-1"></div>

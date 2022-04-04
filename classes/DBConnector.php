@@ -41,12 +41,11 @@ class Connection
 
 class Post
 {
-    public function create($tableName, $data)
+    public static function create($tableName, $data)
     {
-       $sql = "INSERT INTO " . $tableName . "(" . implode(array_keys($data), ", ") . ") VALUES ('" . implode(array_values($data), "', '") . "')";
+       $sql = "INSERT INTO " . $tableName . "(" . implode(", ", array_keys($data)) . ") VALUES ('" . implode("', '", array_values($data)) . "')";
        
        var_dump($sql);
-
         $conn = Connection::getInstance();
         $stmt = $conn->prepare($sql);
         $success = $stmt->execute();
@@ -61,8 +60,7 @@ class Post
             // $this->id = $conn->lastInsertId('Story');
         }
     }
-
-    public function edit($tableName, $id, $data)
+    public static function edit($tableName, $id, $data)
     {
       $sql = 'UPDATE ' . $tableName . ' SET ';
       $count = 0;
@@ -73,9 +71,7 @@ class Post
           $sql .= ', ';
         }
       }
-
       $sql .= ' WHERE id = ' . $id;
-
       // var_dump($sql);
       
       $conn = Connection::getInstance();

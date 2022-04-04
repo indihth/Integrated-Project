@@ -52,7 +52,8 @@ try {
         <li><a class="active nav-item" href="index.php">Home</a></li>
         <li><a class="nav-item" href="#news">News</a></li>
         <li><a class="nav-item" href="#news">Events</a></li>
-        <li><a class="nav-item" href="#news">Add Story</a></li>
+        <li><a class="nav-item" href="add_author_form.php">Add Author</a></li>
+        <li><a class="nav-item" href="add_story_form.php">Add Story</a></li>
       </ul>
     </nav>
   </div>
