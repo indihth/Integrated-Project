@@ -1,7 +1,7 @@
 <?php
   require_once 'classes/DBConnector.php';
 
-  $story = Get::byId('stories', $_GET["id"]);
+  $story["id"] = $_POST["id"];
 
   try {
       
@@ -17,7 +17,7 @@
         'category_id' => $_POST['category_id']
       ];
       
-      Post::edit('stories', $story, $data);
+      Post::edit('stories',  $story["id"], $data);
 
       header("Location: index.php");
       

@@ -74,7 +74,7 @@ try {
         </div>
       </div>
 
-      <a href="update_story_form.php?id=<?= $story->id; ?>">Update</a>
+      <a href="edit_story_form.php?id=<?= $story->id; ?>">Edit</a>
     </div>
 
     <div class="width-1"></div>

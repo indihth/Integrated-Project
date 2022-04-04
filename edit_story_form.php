@@ -4,6 +4,10 @@ require_once 'classes/DBConnector.php';
 try {
 
     $story = Get::byId('stories', $_GET["id"]);
+    $author = Get::byId('authors', $story->author_id);
+    $category = Get::byId('categories', $story->category_id);
+
+    
     $categories = Get::all('categories');
     $authors = Get::all('authors');
 } catch (Exception $e) {
@@ -52,10 +56,13 @@ try {
     </div>
 
     <div class="main">
-        <h2>Add Story</h2>
+        <h2>Edit Story</h2>
 
         <!-- important POST method -->
-        <form method="POST" action="update_story.php" class="form">
+        <form method="POST" action="edit_story.php" class="form">
+
+        <input type="hidden" name="id" value="<?= $story->id ?>">
+        
             <div>
                 <label for="">Headline</label>
                 <!-- use NAME to put value into POST -->
@@ -63,36 +70,38 @@ try {
             </div>
 
             <div>
-                <label for="">Short headline</label>
-                <input type="text" name="short_headline" value="<?= $story->headline ?>">
+                <label for="short_headline">Short headline</label>
+                <input type="text" name="short_headline" value="<?= $story->short_headline ?>">
             </div>
 
             <div>
-                <label for="">Sub-heading</label>
-                <input type="text" name="sub_heading" value="<?= $story->headline ?>">
+                <label for="sub_heading">Sub-heading</label>
+                <input type="text" name="sub_heading" value="<?= $story->sub_heading ?>">
             </div>
             <div>
-                <label for="">Main Story</label>
-                <textarea name="main_story" cols="30" rows="10" value="<?= $story->headline ?>"></textarea>
+                <label for="main_story">Main Story</label>
+                <textarea name="main_story" cols="30" rows="10" ><?= $story->main_story ?></textarea>
             </div>
             <div>
-                <label for="">Summary</label>
-                <textarea name="summary" cols="30" rows="10" value="<?= $story->headline ?>"></textarea>
+                <label for="summary">Summary</label>
+                <textarea name="summary" cols="30" rows="10"><?= $story->summary ?></textarea>
             </div>
             <div>
                 <label for="">Date</label>
-                <input type="date" name="date" value="<?= $story->headline ?>">
+                <input type="date" name="date" value="<?= $story->date ?>">
             </div>
             <div>
                 <label for="">Time</label>
-                <input type="time" name="time" value="<?= $story->headline ?>">
+                <input type="time" name="time" value="<?= $story->time ?>">
             </div>
             <div>
                 <label for="">Author</label>
                 <select name="author_id">
 
                     <?php foreach ($authors as $author) { ?>
-                        <option value="<?= $author->id ?>"><?= $author->first_name ?> <?= $author->last_name ?></option>
+                        <option value="<?= $author->id ?>" 
+                       <?php if ($author === $author->id) echo "selected"?>
+                        ><?= $author->first_name ?> <?= $author->last_name ?></option>
                     <?php } ?>
 
                 </select>
@@ -109,7 +118,7 @@ try {
             </div>
 
             <a href="index.php">Cancel</a>
-            <input type="submit">
+            <a href="edit_story.php?id=<?= $story->id; ?>"><input type="submit"></a>
 
     </div>
 
