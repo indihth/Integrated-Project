@@ -1,3 +1,22 @@
+<?php
+require_once 'classes/DBConnector.php';
+
+try {
+
+    $author = Get::byId('authors', $_GET["id"]);
+
+    // $story = Get::byId('stories', $_GET["id"]);
+    // $author = Get::byId('authors', $author->author_id);
+    // $category = Get::byId('categories', $story->category_id);
+
+    
+    $categories = Get::all('categories');
+    $authors = Get::all('authors');
+} catch (Exception $e) {
+    die("Exception: " . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,38 +41,39 @@
 
 <body>
 
-    <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-    include($IPATH . "nav.html"); ?>
+<!-- TITLE AND NAVBAR -->
+<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
 
     <div class="main">
-        <h2>Add Author</h2>
+        <h2>Edit Author</h2>
 
         <!-- important POST method -->
-        <form method="POST" action="add_author.php" class="form">
-            <div>
-                <label for="first_name">First Name</label>
-                <!-- use NAME to put value into POST -->
-                <input type="text" id="first_name" name="first_name">
+        <form method="POST" action="edit_author.php" class="form">
 
-                <!-- checking if there's an error then printing it out -->
-                <div id="first_name_error" class="error"></div>
+        <input type="hidden" name="id" value="<?= $author->id ?>">
+        
+        <div>
+                <label for="">First Name</label>
+                <!-- use NAME to put value into POST -->
+                <input type="text" id="first_name" name="first_name" value="<?= $author->first_name ?>">
+                 <!-- checking if there's an error then printing it out -->
+                 <div id="first_name_error" class="error"></div>
             </div>
 
             <div>
                 <label for="">Last Name</label>
-                <input type="text" id="last_name" name="last_name">
+                <input type="text" id="last_name" name="last_name" value="<?= $author->last_name ?>">
                 <div id="last_name_error" class="error"></div>
             </div>
             <div>
                 <label for="">Link</label>
-                <input type="text" id="link" name="link">
+                <input type="text" id="link" name="link" value="<?= $author->link ?>">
                 <div id="link_error" class="error"></div>
             </div>
-            <div class="buttons">
-                <button class="button primary"><a href="index.php">Cancel</a></button>
-                <button id="submit_btn" class="button primary" type="submit" formaction="add_author.php">Create</button>
-            </div>
+
+            <a href="index.php">Cancel</a>
+            <!-- <a href="edit_author.php?id=<?= $author->id; ?>"><input type="submit"></a> -->
+            <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
 
     </div>
 
@@ -67,11 +87,3 @@
 </body>
 
 </html>
-
-<!-- if page left, clear the data -move to different page then return to no data- -->
-<!-- <?php
-        if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
-            unset($_SESSION["data"]);
-            unset($_SESSION["errors"]);
-        }
-        ?> -->

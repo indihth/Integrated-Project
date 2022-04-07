@@ -89,6 +89,24 @@ class Post
           }
       }
     }
+    public static function delete($tableName, $id)
+    {
+       $sql = "DELETE FROM " . $tableName . "  WHERE id = " . $id;
+       
+       var_dump($sql);
+        $conn = Connection::getInstance();
+        $stmt = $conn->prepare($sql);
+        $success = $stmt->execute();
+        // $success = $conn->exec($sql);
+        if (!$success) {
+            throw new Exception("Failed to delete data");
+        } else {
+            $rowCount = $stmt->rowCount();
+            if ($rowCount !== 1) {
+                throw new Exception("Error deleting data");
+            }
+        }
+    }
 }
 
 class Get
@@ -138,6 +156,52 @@ class Get
         } else {
             $data = $stmt->fetch();
             return $data;
+        }
+    }
+
+    // added get by author function
+    public static function byAuthor($id, $orderBy, $limit = 0, $skip = 0)
+    {
+
+        $sql = "SELECT * FROM stories WHERE stories.author_id = $id;";
+        // $sql = "SELECT id FROM " . CATEGORIES_TABLE_NAME . " WHERE name = '" . $category . "' LIMIT 1";
+        $connection = Connection::getInstance();
+        $stmt = $connection->prepare($sql);
+        $success = $stmt->execute();
+        if (!$success) {
+            throw new Exception("Failed to retrieve category");
+        } else {
+            // $category_id = $stmt->fetch()->id;
+            
+            // // var_dump($stmt->fetch()->id);
+
+            // $sql = 'SELECT * FROM '. STORIES_TABLE_NAME;
+            
+            // $sql .= ' WHERE ' . CATEGORIES_FOREIGN_KEY . ' = ' . $category_id;
+            
+            if ($orderBy !== 0) {
+              $sql .= ' ORDER BY ' . $orderBy;
+            }
+
+            if ($limit > 0) {
+              $sql .= ' LIMIT ' . $limit;
+            }
+
+            if ($skip > 0) {
+              $sql .= ' OFFSET ' . $skip;
+            }
+            
+            
+
+            $connection = Connection::getInstance();
+            $stmt = $connection->prepare($sql);
+            $success = $stmt->execute();
+            if (!$success) {
+                throw new Exception("Failed to retrieve stories");
+            } else {
+                $stories = $stmt->fetchAll();
+                return $stories;
+            }
         }
     }
 

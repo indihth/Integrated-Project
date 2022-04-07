@@ -44,19 +44,8 @@ try {
 
 <body>
 
-  <!-- navbar -->
-  <div class="header">
-    <a href="index.php"><h1>Culture News</h1></a>
-    <nav>
-      <ul class="nav-cont">
-        <li><a class="active nav-item" href="index.php">Home</a></li>
-        <li><a class="nav-item" href="#news">News</a></li>
-        <li><a class="nav-item" href="#news">Events</a></li>
-        <li><a class="nav-item" href="add_author_form.php">Add Author</a></li>
-        <li><a class="nav-item" href="add_story_form.php">Add Story</a></li>
-      </ul>
-    </nav>
-  </div>
+ <!-- TITLE AND NAVBAR -->
+<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
 
 
   <div class="container">
