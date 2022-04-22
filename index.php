@@ -4,16 +4,16 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-  // gets 1st newest story from World
-  $headlineStories = Get::byCategoryOrderBy('world', 'date ASC', 1);
-  // gets all subsequent stories from World, skips first
-  $subStories = Get::byCategoryOrderBy('world', 'date ASC', 2, 1);
+  // gets 1st newest story from Film&TV
+  $headlineStories = Get::byCategoryOrderBy('Film&TV', 'date ASC', 1);
+  // gets all subsequent stories from Film&TV, skips first
+  $subStories = Get::byCategoryOrderBy('Film&TV', 'date ASC', 2, 1);
 
   // add event table for left headline column
   // $events = Get::all('events', 6);
 
-  $cultureStories = Get::byCategory('Culture', 4);
-  $worldStories = Get::byCategoryOrderBy('World', 'date ASC', 4);
+  $lifeStories = Get::byCategory('Life', 4);
+  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 4);
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -55,18 +55,18 @@ try {
       <!-- 1st headline only category -->
       <div class="mb-1">
         <div class="eventTag tag">
-          <p>Current Events</p>
+          <p>stage</p>
         </div>
 
-        <?php foreach ($worldStories as $worldStory) {
-          $category = GET::byId('categories', $worldStory->category_id);
-          $author = GET::byId('authors', $worldStory->author_id);    ?>
+        <?php foreach ($stageStories as $stageStory) {
+          $category = GET::byId('categories', $stageStory->category_id);
+          $author = GET::byId('authors', $stageStory->author_id);    ?>
           <div class="story">
             <!-- <div class="tag">
             <p><?= $category->name; ?></p>
           </div> -->
-            <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+            <h3><a href="article.php?id=<?= $stageStory->id ?>"><?= $stageStory->short_headline; ?></a></h3>
+            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $stageStory->date; ?></h5>
           </div>
         <?php  } ?>
       </div>
@@ -83,15 +83,15 @@ try {
         </div>
         </div> -->
 
-        <?php foreach ($worldStories as $worldStory) {
-          $category = GET::byId('categories', $worldStory->category_id);
-          $author = GET::byId('authors', $worldStory->author_id);    ?>
+        <?php foreach ($stageStories as $stageStory) {
+          $category = GET::byId('categories', $stageStory->category_id);
+          $author = GET::byId('authors', $stageStory->author_id);    ?>
           <div class="story">
             <!-- <div class="tag">
             <p><?= $category->name; ?></p>
           </div> -->
-            <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+            <h3><a href="article.php?id=<?= $stageStory->id ?>"><?= $stageStory->short_headline; ?></a></h3>
+            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $stageStory->date; ?></h5>
           </div>
 
         <?php  } ?>
@@ -133,18 +133,18 @@ try {
     </div>
 
     <!-- Right - mini stories -->
-    <?php foreach ($cultureStories as $cultureStory) {
-      $category = GET::byId('categories', $cultureStory->category_id);
-      $author = GET::byId('authors', $cultureStory->author_id);    ?>
+    <?php foreach ($lifeStories as $lifeStory) {
+      $category = GET::byId('categories', $lifeStory->category_id);
+      $author = GET::byId('authors', $lifeStory->author_id);    ?>
 
       <div class="width-3">
         <div class="story">
           <div class="tag">
             <p><span><?= $category->name; ?></span></p>
           </div>
-          <h3><a href="article.php?id=<?= $cultureStory->id ?>"><?= $cultureStory->short_headline; ?></a></h3>
-          <p><?= $cultureStory->summary; ?></p>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $cultureStory->date; ?></h5>
+          <h3><a href="article.php?id=<?= $lifeStory->id ?>"><?= $lifeStory->short_headline; ?></a></h3>
+          <p><?= $lifeStory->summary; ?></p>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $lifeStory->date; ?></h5>
         </div>
 
       <?php  } ?>

@@ -3,13 +3,13 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-    $author = Get::byId('authors', $_GET["id"]);
+    $author = Get::byId('authors', $_GET['id']);
 
     // $story = Get::byId('stories', $_GET["id"]);
     // $author = Get::byId('authors', $author->author_id);
     // $category = Get::byId('categories', $story->category_id);
 
-    
+
     $categories = Get::all('categories');
     $authors = Get::all('authors');
 } catch (Exception $e) {
@@ -41,23 +41,24 @@ try {
 
 <body>
 
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+    <!-- TITLE AND NAVBAR -->
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    include($IPATH . "nav.html"); ?>
 
     <div class="main">
-        <h2>Edit Author</h2>
 
         <!-- important POST method -->
-        <form method="POST" action="edit_author.php" class="form">
+        <form method="POST" action="edit_author.php" class="form center">
+            <h2>Edit Author</h2>
 
-        <input type="hidden" name="id" value="<?= $author->id ?>">
-        
-        <div>
+            <input type="hidden" name="id" value="<?= $author->id ?>">
+
+            <div>
                 <label for="">First Name</label>
                 <!-- use NAME to put value into POST -->
                 <input type="text" id="first_name" name="first_name" value="<?= $author->first_name ?>">
-                 <!-- checking if there's an error then printing it out -->
-                 <div id="first_name_error" class="error"></div>
+                <!-- checking if there's an error then printing it out -->
+                <div id="first_name_error" class="error"></div>
             </div>
 
             <div>
@@ -67,13 +68,12 @@ try {
             </div>
             <div>
                 <label for="">Link</label>
-                <input type="text" id="link" name="link" value="<?= $author->link ?>">
+                <input type="url" id="link" name="link" value="<?= $author->link ?>">
                 <div id="link_error" class="error"></div>
             </div>
 
-            <a href="index.php">Cancel</a>
-            <!-- <a href="edit_author.php?id=<?= $author->id; ?>"><input type="submit"></a> -->
             <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
+            <button><a href="author_view_all.php">Cancel</a></button>
 
     </div>
 

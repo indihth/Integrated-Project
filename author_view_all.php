@@ -11,8 +11,8 @@ try {
   //  write statement to check if any stories have already been used
   //  by ID, avoid doubles in side categories
 
-  $cultureStories = Get::byCategory('Culture', 4);
-  $worldStories = Get::byCategoryOrderBy('World', 'date ASC', 6);
+  $lifeStories = Get::byCategory('Life', 4);
+
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -50,13 +50,12 @@ try {
     <div class="width-8">
       <h1 class="mt-1 mb-1">List of Authors</h1>
 
-      <a class="nav-item" href="add_author_form.php">Add Author</a>
+      <button  role="button"> <a class="nav-item" href="add_author_form.php">Add Author</a></button>
 
       <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Link</th>
+            <th>Names</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +64,6 @@ try {
           foreach ($authors as $author) {
             echo "<tr>";
             echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
-            echo "<td><a href='$author->link'>" . "Website" . "</a></td>";
             echo "</tr>";
           }
           ?>
@@ -84,12 +82,12 @@ try {
       <!-- <div class="heading story">
       <p><span>trending</span> </p>
     </div> -->
-      <?php foreach ($worldStories as $worldStory) {
-        $category = GET::byId('categories', $worldStory->category_id);
-        $author = GET::byId('authors', $worldStory->author_id);    ?>
+      <?php foreach ($lifeStories as $lifeStory) {
+        $category = GET::byId('categories', $lifeStory->category_id);
+        $author = GET::byId('authors', $lifeStory->author_id);    ?>
         <div class="story">
-          <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+          <h3><a href="article.php?id=<?= $lifeStory->id ?>"><?= $lifeStory->short_headline; ?></a></h3>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $lifeStory->date; ?></h5>
         </div>
 
       <?php  } ?>

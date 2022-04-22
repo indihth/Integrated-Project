@@ -7,7 +7,7 @@ try {
     $author = Get::byId('authors', $story->author_id);
     $category = Get::byId('categories', $story->category_id);
 
-    
+
     $categories = Get::all('categories');
     $authors = Get::all('authors');
 } catch (Exception $e) {
@@ -39,17 +39,18 @@ try {
 
 <body>
 
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+    <!-- TITLE AND NAVBAR -->
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    include($IPATH . "nav.html"); ?>
 
     <div class="main">
-        <h2>Edit Story</h2>
-
-        <!-- important POST method -->
-        <form method="POST" action="edit_story.php" class="form">
-
-        <input type="hidden" name="id" value="<?= $story->id ?>">
         
+        <!-- important POST method -->
+        <form method="POST" action="edit_story.php" class="form center">
+            <h2>Edit Story</h2>
+
+            <input type="hidden" name="id" value="<?= $story->id ?>">
+
             <div>
                 <label for="">Headline</label>
                 <!-- use NAME to put value into POST -->
@@ -67,7 +68,7 @@ try {
             </div>
             <div>
                 <label for="main_story">Main Story</label>
-                <textarea name="main_story" cols="30" rows="10" ><?= $story->main_story ?></textarea>
+                <textarea name="main_story" cols="30" rows="10"><?= $story->main_story ?></textarea>
             </div>
             <div>
                 <label for="summary">Summary</label>
@@ -86,9 +87,7 @@ try {
                 <select name="author_id">
 
                     <?php foreach ($authors as $author) { ?>
-                        <option value="<?= $author->id ?>" 
-                       <?php if ($author === $author->id) echo "selected"?>
-                        ><?= $author->first_name ?> <?= $author->last_name ?></option>
+                        <option value="<?= $author->id ?>" <?php if ($author === $author->id) echo "selected" ?>><?= $author->first_name ?> <?= $author->last_name ?></option>
                     <?php } ?>
 
                 </select>
@@ -104,8 +103,10 @@ try {
                 </select>
             </div>
 
-            <a href="index.php">Cancel</a>
-            <a href="edit_story.php?id=<?= $story->id; ?>"><input type="submit"></a>
+            <div>
+                <a href="edit_story.php?id=<?= $story->id; ?>"><input type="submit"></a>
+                <a href="index.php"><button>Cancel</button></a>
+            </div>
 
     </div>
 

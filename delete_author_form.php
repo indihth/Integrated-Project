@@ -9,7 +9,7 @@ try {
     // $author = Get::byId('authors', $author->author_id);
     // $category = Get::byId('categories', $story->category_id);
 
-    
+
     $categories = Get::all('categories');
     $authors = Get::all('authors');
 } catch (Exception $e) {
@@ -41,18 +41,19 @@ try {
 
 <body>
 
- <!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+    <!-- TITLE AND NAVBAR -->
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    include($IPATH . "nav.html"); ?>
 
     <div class="main">
-        <h2>Delete Author</h2>
 
         <!-- important POST method -->
-        <form method="POST" action="delete_author.php" class="form">
+        <form method="POST" action="delete_author.php" class="form center">
+            <h2>Delete Author</h2>
 
-        <input type="hidden" name="id" value="<?= $author->id ?>">
-        
-        <div>
+            <input type="hidden" name="id" value="<?= $author->id ?>">
+
+            <div>
                 <label for="">First Name</label>
                 <!-- use NAME to put value into POST -->
                 <input type="text" name="first_name" value="<?= $author->first_name ?>" disabled>
@@ -67,8 +68,10 @@ try {
                 <input type="text" name="link" value="<?= $author->link ?>" disabled>
             </div>
 
-            <a href="index.php">Cancel</a>
-            <a href="delete_author.php?id=<?= $author->id; ?>"><input type="submit"></a>
+            <div>
+                <a href="delete_author.php?id=<?= $author->id; ?>"><input type="submit"></a>
+                <a href="author_view_all.php"><button>Cancel</button> </a>
+            </div>
 
     </div>
 

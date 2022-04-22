@@ -6,7 +6,7 @@ define('STORIES_TABLE_NAME', 'stories');
 define('CATEGORIES_TABLE_NAME', 'categories');
 define('CATEGORIES_FOREIGN_KEY', 'category_id');
 define('AUTHORS_TABLE_NAME', 'authors');
-define('AUTHORS_FOREIGN_KEY', 'authory_id');
+define('AUTHORS_FOREIGN_KEY', 'author_id');
 //////////////////////////////////////////////////////
 /////////////////END SETTINGS/////////////////////////
 //////////////////////////////////////////////////////
@@ -89,6 +89,7 @@ class Post
           }
       }
     }
+    
     public static function delete($tableName, $id)
     {
        $sql = "DELETE FROM " . $tableName . "  WHERE id = " . $id;
@@ -160,6 +161,7 @@ class Get
     }
 
     // added get by author function
+    // didn't see it was already written and commented out below
     public static function byAuthor($id, $orderBy, $limit = 0, $skip = 0)
     {
 

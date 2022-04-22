@@ -45,26 +45,40 @@ function validate_date($date) {
 //-------------------------------------------------------------------
 
 
-function patient_validate($data) {
+function author_validate($data) {
 
     $errors = [];           //to hold errors, initialise empty
-    $patient = [];          //to hold validated patient data
+    $author = [];          //to hold validated author data
 
     //-------------------------------------------------------------------
-    //validate name
+    //validate first name
     //-------------------------------------------------------------------
-
-    //CTRL + D to select next instance of highlighted word
 
     //checking if the name field is empty
-    if (empty($data["name"])) {
+    if (empty($data["first_name"])) {
         //use same name for error as the field being validated
-        $errors["name"] = "The name field is requried.";
+        $errors["first_name"] = "The first name field is requried.";
     } else {
         //to store value, good to match array names from above
-        $patient["name"] = sanitize_input($data["name"]);
-        if (!validate_name($patient["name"])) {
-            $errors["name"] = "Only letters and spaces are allowed.";
+        $author["first_name"] = sanitize_input($data["first_name"]);
+        if (!validate_name($author["first_name"])) {
+            $errors["first_name"] = "Only letters and spaces are allowed.";
+        }
+    }
+
+    //-------------------------------------------------------------------
+    //validate last name
+    //-------------------------------------------------------------------
+
+    //checking if the name field is empty
+    if (empty($data["last_name"])) {
+        //use same name for error as the field being validated
+        $errors["last_name"] = "The last name field is requried.";
+    } else {
+        //to store value, good to match array names from above
+        $author["last_name"] = sanitize_input($data["last_name"]);
+        if (!validate_name($author["last_name"])) {
+            $errors["last_name"] = "Only letters and spaces are allowed.";
         }
     }
 
@@ -73,26 +87,12 @@ function patient_validate($data) {
     //validate address
     //-------------------------------------------------------------------
 
-    if (empty($data["address"])) {
-        $errors["address"] = "The address field is requried.";
+    if (empty($data["link"])) {
+        $errors["link"] = "The link field is requried.";
     } else {
-        $patient["address"] = sanitize_input($data["address"]);
-        if (!validate_address($patient["address"])) {
-            $errors["address"] = "Only letters, numbers and spaces are allowed.";
-        }
-    }
-
-
-    //-------------------------------------------------------------------
-    //validate phone
-    //-------------------------------------------------------------------
-
-    if (empty($data["phone"])) {
-        $errors["phone"] = "The phone field is requried.";
-    } else {
-        $patient["phone"] = sanitize_input($data["phone"]);
-        if (!validate_phone($patient["phone"])) {
-            $errors["phone"] = "Phone number should be (##) ####### format.";
+        $author["link"] = sanitize_input($data["link"]);
+        if (!validate_email($author["link"])) {
+            $errors["link"] = "Only letters, numbers and spaces are allowed.";
         }
     }
 
@@ -100,27 +100,27 @@ function patient_validate($data) {
     //validate email
     //-------------------------------------------------------------------
 
-    if (empty($data["email"])) {
-        $errors["email"] = "The email field is requried.";
-    } else {
-        $patient["email"] = sanitize_input($data["email"]);
-        if (!validate_email($patient["email"])) {
-            $errors["email"] = "Invalid email format.";
-        }
-    }
+    // if (empty($data["email"])) {
+    //     $errors["email"] = "The email field is requried.";
+    // } else {
+    //     $author["email"] = sanitize_input($data["email"]);
+    //     if (!validate_email($author["email"])) {
+    //         $errors["email"] = "Invalid email format.";
+    //     }
+    // }
 
     //-------------------------------------------------------------------
     //validate date of birth
     //-------------------------------------------------------------------
 
-    if (empty($data["dob"])) {
-        $errors["dob"] = "The date of birth field is requried.";
-    } else {
-        $patient["dob"] = sanitize_input($data["dob"]);
-        if (!validate_date($patient["dob"])) {
-            $errors["dob"] = "Invalid date of birth.";
-        }
-    }
+    // if (empty($data["dob"])) {
+    //     $errors["dob"] = "The date of birth field is requried.";
+    // } else {
+    //     $author["dob"] = sanitize_input($data["dob"]);
+    //     if (!validate_date($author["dob"])) {
+    //         $errors["dob"] = "Invalid date of birth.";
+    //     }
+    // }
 
     //-------------------------------------------------------------------
     //validate medical centre
@@ -129,7 +129,7 @@ function patient_validate($data) {
     // if (empty($data["centre"])) {
     //     $errors["centre"] = "The medical centre field is requried.";
     // } else {
-        $patient["centre"] = sanitize_input($data["centre"]);
+        // $author["centre"] = sanitize_input($data["centre"]);
 
     //     //creating array with the valid options to use to validate below
     //     //if submitted option doesn't match array, submit an error
@@ -141,7 +141,7 @@ function patient_validate($data) {
     //         "Bray Medical Centre",
     //         "Merrion Fertility Clinic"
     //     ];
-    //     if (!in_array($patient["centre"], $valid_centres)) {
+    //     if (!in_array($author["centre"], $valid_centres)) {
     //         $errors["centre"] = "Invalid medical centre option";
     //     }
     // }    
@@ -150,47 +150,18 @@ function patient_validate($data) {
     //validate  insurance
     //-------------------------------------------------------------------
 
-    if (empty($data["insurance"])) {
-        $errors["insurance"] = "The insurance field is requried.";
-    } else {
-        $patient["insurance"] = sanitize_input($data["insurance"]);
-        $valid_insurance = ["None", "VHI", "Laya", "Irish Life"];
-        if (!in_array($patient["insurance"], $valid_insurance)) {
-            $errors["insurance"] = "Invalid insurance option";
-        }
-    }
-
-    //-------------------------------------------------------------------
-    //validate preferences
-    //-------------------------------------------------------------------
-
-    if (empty($data["preferences"])) {
-        $errors["preferences"] = "The preferences field is requried.";
-    } else {
-        $patient["preferences"] = [];
-
-        //go through each array item in preferences and sanatize
-        //otherwise error from trim function
-        foreach ($data["preferences"] as $preference) {            //reference vid 4, 3:47
-            $patient["preferences"][] = sanitize_input($preference);        
-        }
-        
-        //more complicated because it needs to validate values within an array
-
-        $valid_preferences = ["Email", "Phone", "Post"];
-        //need to loop through all value of array to check
-        foreach ($patient["preferences"] as $preference) {
-            //if a value from $preference is NOT in $valid_preferences
-            if (!in_array($preference, $valid_preferences)) {
-                $errors["preferences"] = "Invalid perference option";
-                break;      //stops loop from running
-            }
-        }
-    }
+    // if (empty($data["insurance"])) {
+    //     $errors["insurance"] = "The insurance field is requried.";
+    // } else {
+    //     $author["insurance"] = sanitize_input($data["insurance"]);
+    //     $valid_insurance = ["None", "VHI", "Laya", "Irish Life"];
+    //     if (!in_array($author["insurance"], $valid_insurance)) {
+    //         $errors["insurance"] = "Invalid insurance option";
+    //     }
+    // }
 
     return [
-        $patient,
+        $author,
         $errors
     ];
 }
-?>

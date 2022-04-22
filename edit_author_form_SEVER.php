@@ -1,15 +1,20 @@
 <?php
+require_once 'classes/DBConnector.php';
 
 session_start();
 
-//check to see if there is already data and if so, display it
-if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
+if (isset($_SESSION["data"]) and isset($_SESSION["errors"])) {
     $data = $_SESSION["data"];
     $errors = $_SESSION["errors"];
 } else {
-    $data = [];
-    $errors = [];
+    try {
+
+        $author = Get::byId('authors', $_POST["id"]);
+    } catch (Exception $e) {
+        die("Exception: " . $e->getMessage());
+    }
 }
+
 
 ?>
 
@@ -44,31 +49,39 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
     <div class="main">
 
         <!-- important POST method -->
-        <form method="POST" action="add_author.php" class="form center">
-            <h2>Add Author</h2>
+        <form method="POST" action="edit_author.php" class="form center">
+            <h2>Edit Author</h2>
+
+            <input type="hidden" name="id" value="<?= $data["id"] ?>">
+            <!-- <input type="hidden" name="id" value="<?= $author->id ?>"> -->
 
             <label for="first_name">First Name</label>
             <!-- use NAME to put value into POST -->
-            <input type="text" id="first_name" name="first_name" value="<?php if (isset($data["first_name"])) echo $data["first_name"];?>">
+            <input type="text" id="first_name" name="first_name" value="<?php if (isset($data["first_name"])) echo $data["first_name"]; ?>">
 
             <!-- checking if there's an error then printing it out -->
-            <div id="first_name_error" class="error"><?php if (isset($errors["first_name"])) echo $errors["first_name"];?></div>
+            <div id="first_name_error" class="error"><?php if (isset($errors["first_name"])) echo $errors["first_name"]; ?></div>
 
             <label for="">Last Name</label>
-            <input type="text" id="last_name" name="last_name" value="<?php if (isset($data["last_name"])) echo $data["last_name"];?>">
-            <div id="last_name_error" class="error"><?php if (isset($errors["last_name"])) echo $errors["last_name"];?></div>
+            <input type="text" id="last_name" name="last_name" value="<?php if (isset($data["last_name"])) echo $data["last_name"]; ?>">
+            <div id="last_name_error" class="error"><?php if (isset($errors["last_name"])) echo $errors["last_name"]; ?></div>
 
             <label for="">Link</label>
-            <input type="url" id="link" name="link" value="<?php if (isset($data["link"])) echo $data["link"];?>">
-            <div id="link_error" class="error"><?php if (isset($errors["link"])) echo $errors["link"];?></div>
+            <input type="text" id="link" name="link" value="<?php if (isset($data["link"])) echo $data["link"]; ?>">
+            <div id="link_error" class="error"><?php if (isset($errors["link"])) echo $errors["link"]; ?></div>
 
             <div>
                 <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_author.php">Submit</button>
                 <button class="button-2" role="button"><a href="index.php">Cancel</a></button>
             </div>
+
+            <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php"></button>
+            <a href="author_view_all.php"><button>Cancel</button></a>
+
     </div>
 
     </form>
+    </div>
 
     <footer class="footer">
         <p>&copy; 2022, all rights reserved.</p>
@@ -80,8 +93,8 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
 
 <!-- if page left, clear the data -move to different page then return to no data- -->
 <?php
-        if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
-            unset($_SESSION["data"]);
-            unset($_SESSION["errors"]);
-        }
-        ?>
+if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
+    unset($_SESSION["data"]);
+    unset($_SESSION["errors"]);
+}
+?>

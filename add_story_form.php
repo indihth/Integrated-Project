@@ -1,5 +1,15 @@
 <?php
 require_once 'classes/DBConnector.php';
+session_start();
+
+//check to see if there is already data and if so, display it
+if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
+    $data = $_SESSION["data"];
+    $errors = $_SESSION["errors"];
+} else {
+    $data = [];
+    $errors = [];
+}
 
 try {
 
@@ -34,69 +44,71 @@ try {
 
 <body>
 
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+    <!-- TITLE AND NAVBAR -->
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    include($IPATH . "nav.html"); ?>
 
     <div class="main">
-        <h2>Add Story</h2>
 
         <!-- important POST method -->
-        <form method="POST" action="add_story.php" class="form">
-            <div>
-                <label for="">Headline</label>
-                <!-- use NAME to put value into POST -->
-                <input type="text" name="headline">
-            </div>
+        <form method="POST" action="add_story.php" class="form center">
+            <h2>Add Story</h2>
+
+            <label for="headline">Headline</label>
+            <!-- use NAME to put value into POST -->
+            <input type="text" id="headline" name="headline" value="<?php if (isset($data["headline"])) echo $data["headline"];?>">
+
+            <div id="headline_error" class="error"><?php if (isset($errors["headline"])) echo $errors["headline"]; ?></div>
+
+            <label for="">Short headline</label>
+            <input id="short_headline" type="text" name="short_headline" value="<?php if (isset($data["short_headline"])) echo $data["short_headline"];?>">
+            <div id="short_headline_error" class="error"><?php if (isset($errors["short_headline"])) echo $errors["short_headline"]; ?></div>
+
+            <label for="">Sub-heading</label>
+            <input id="sub_heading"  type="text" name="sub_heading" value="<?php if (isset($data["sub_heading"])) echo $data["sub_heading"];?>">
+            <div id="sub_heading_error" class="error"><?php if (isset($errors["sub_heading"])) echo $errors["sub_heading"]; ?></div>
+
+            <label for="">Summary</label>
+            <textarea id="summary" name="summary" cols="30" rows="10" value="<?php if (isset($data["summary"])) echo $data["summary"];?>"></textarea>
+            <div id="summary_error" class="error"><?php if (isset($errors["summary"])) echo $errors["summary"]; ?></div>
+
+            <label for="">Main Story</label>
+            <textarea id="main_story" name="main_story" cols="30" rows="10" value="<?php if (isset($data["main_story"])) echo $data["main_story"];?>"></textarea>
+            <div id="main_story_error" class="error"><?php if (isset($errors["main_story"])) echo $errors["main_story"]; ?></div>
+
+            <label for="">Date</label>
+            <input id="date" type="date" name="date" value="<?php if (isset($data["date"])) echo $data["date"];?>">
+
+            <label for="">Time</label>
+            <input id="time" type="time" name="time" value="<?php if (isset($data["time"])) echo $data["time"];?>">
+
+            <label for="">Author</label>
+            <select id="author_id" name="author_id">
+
+                <?php foreach ($authors as $author) { ?>
+                    <option value="<?= $author->id ?>"><?= $author->first_name ?> <?= $author->last_name ?></option>
+                <?php } ?>
+
+            </select>
+
+            <label for="">Category</label>
+            <select id="category_id" name="category_id">
+
+                <?php foreach ($categories as $category) { ?>
+                    <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                <?php } ?>
+
+            </select>
 
             <div>
-                <label for="">Short headline</label>
-                <input type="text" name="short_headline">
+                <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_story.php">Submit</button>
+                <button class="button-2" role="button"><a href="index.php">Cancel</a></button>
             </div>
 
-            <div>
-                <label for="">Sub-heading</label>
-                <input type="text" name="sub_heading">
-            </div>
-            <div>
-                <label for="">Main Story</label>
-                <textarea name="main_story" cols="30" rows="10"></textarea>
-            </div>
-            <div>
-                <label for="">Summary</label>
-                <textarea name="summary" cols="30" rows="10"></textarea>
-            </div>
-            <div>
-                <label for="">Date</label>
-                <input type="date" name="date">
-            </div>
-            <div>
-                <label for="">Time</label>
-                <input type="time" name="time">
-            </div>
-            <div>
-                <label for="">Author</label>
-                <select name="author_id">
-
-                    <?php foreach ($authors as $author) { ?>
-                        <option value="<?= $author->id ?>"><?= $author->first_name ?> <?= $author->last_name ?></option>
-                    <?php } ?>
-
-                </select>
-            </div>
-            <div>
-                <label for="">Category</label>
-                <select name="category_id">
-
-                    <?php foreach ($categories as $category) { ?>
-                        <option value="<?= $category->id ?>"><?= $category->name ?></option>
-                    <?php } ?>
-
-                </select>
-            </div>
-
-            <a href="index.php">Cancel</a>
-            <input type="submit">
-
+            <!-- <div>
+                <input type="submit">
+                <a href="index.php"><button>Cancel</button></a>
+            </div> -->
     </div>
 
     </form>
@@ -105,7 +117,15 @@ try {
     <footer class="footer">
         <p>&copy; 2022, all rights reserved.</p>
     </footer>
-    <script src="js/patient_validate.js"></script>
+    <script src="js/validate_story.js"></script>
 </body>
 
 </html>
+
+<!-- if page left, clear the data -move to different page then return to no data- -->
+<?php
+        if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
+            unset($_SESSION["data"]);
+            unset($_SESSION["errors"]);
+        }
+        ?>

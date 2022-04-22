@@ -12,4 +12,6 @@
   } catch (Exception $e) {
     die("Exception: " . $e->getMessage());
   }
+
+  header("Location: author_view_all.php");
 ?>

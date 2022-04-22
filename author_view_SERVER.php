@@ -53,10 +53,11 @@ try {
 
       <div>
         <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
-
-        <button class="button-2" role="button"> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button>
-
-        <button class="button-2"><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
+        <form method="POST">
+          <button class="button-2" role="button" formaction="edit_author_form.php">Edit Author</button>
+          <button class="button-2" role="button" formaction="delete_author_form.php">Delete Author</button>
+          <input type="hidden" name="id" value="<?= $author["id"] ?>">
+        </form>
       </div>
 
       <?php foreach ($stories as $story) {

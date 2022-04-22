@@ -44,12 +44,12 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
     <div class="main">
 
         <!-- important POST method -->
-        <form method="POST" action="add_author.php" class="form center">
-            <h2>Add Author</h2>
+        <form method="POST" action="add_story.php" class="form center">
+            <h2>Add story</h2>
 
-            <label for="first_name">First Name</label>
+            <label for="headline">headline</label>
             <!-- use NAME to put value into POST -->
-            <input type="text" id="first_name" name="first_name" value="<?php if (isset($data["first_name"])) echo $data["first_name"];?>">
+            <input type="text" id="headline" name="headline" value="<?php if (isset($data["headline"])) echo $data["headline"];?>">
 
             <!-- checking if there's an error then printing it out -->
             <div id="first_name_error" class="error"><?php if (isset($errors["first_name"])) echo $errors["first_name"];?></div>
@@ -63,7 +63,7 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
             <div id="link_error" class="error"><?php if (isset($errors["link"])) echo $errors["link"];?></div>
 
             <div>
-                <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_author.php">Submit</button>
+                <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_story.php">Submit</button>
                 <button class="button-2" role="button"><a href="index.php">Cancel</a></button>
             </div>
     </div>

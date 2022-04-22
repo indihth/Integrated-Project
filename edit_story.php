@@ -19,7 +19,7 @@
       
       Post::edit('stories',  $story["id"], $data);
 
-      header("Location: index.php");
+      header("Location: article.php?id=".$story["id"]);
       
   } catch (Exception $e) {
     die("Exception: " . $e->getMessage());

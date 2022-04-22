@@ -10,9 +10,11 @@ try {
 
   //  write statement to check if any stories have already been used
   //  by ID, avoid doubles in side categories
+  //  same category as current story
 
-  $cultureStories = Get::byCategory('Culture', 4);
-  $worldStories = Get::byCategoryOrderBy('World', 'date ASC', 6);
+  
+  $relatedStories = Get::byCategoryOrderBy($category->name, 'date ASC', 4);
+  // $otherStories = ??
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -51,12 +53,13 @@ try {
     <div class="width-8">
       <!-- main story -->
       <div class="story">
-        <div class="width-12 tag">
-          <p>Welt</p>
-        </div>
+        <!-- <div class="width-12 tag">
+          <p><?= $category->name; ?></p>
+        </div> -->
 
         <div class="width-6 viewArticle">
-          <h1> <?= $story->headline ?> </h1>
+          <h1 class="mb-1"><?= $story->headline ?></h1>
+          <h4 class="mb-1"><?= $story->short_headline ?></h4>
           <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $story->date ?></h5>
         </div>
 
@@ -80,12 +83,12 @@ try {
       <!-- <div class="heading story">
       <p><span>trending</span> </p>
     </div> -->
-      <?php foreach ($worldStories as $worldStory) {
-        $category = GET::byId('categories', $worldStory->category_id);
-        $author = GET::byId('authors', $worldStory->author_id);    ?>
+      <?php foreach ($relatedStories as $relatedStory) {
+        $category = GET::byId('categories', $relatedStory->category_id);
+        $author = GET::byId('authors', $relatedStory->author_id);    ?>
         <div class="story">
-          <h3><a href="article.php?id=<?= $worldStory->id ?>"><?= $worldStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $worldStory->date; ?></h5>
+          <h3><a href="article.php?id=<?= $relatedStory->id ?>"><?= $relatedStory->short_headline; ?></a></h3>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $relatedStory->date; ?></h5>
         </div>
 
       <?php  } ?>
