@@ -40,11 +40,11 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
     include($IPATH . "nav.html"); ?>
 
     <div class="main">
-        
+
         <!-- important POST method -->
         <form method="POST" action="edit_story.php" class="form center">
             <h2>Edit Story</h2>
@@ -54,59 +54,77 @@ try {
             <div>
                 <label for="">Headline</label>
                 <!-- use NAME to put value into POST -->
-                <input type="text" name="headline" value="<?= $story->headline ?>">
+                <input type="text"  id="headline"  name="headline" value="<?= $story->headline ?>">
+                <div id="headline_error" class="error"></div>
             </div>
 
             <div>
                 <label for="short_headline">Short headline</label>
-                <input type="text" name="short_headline" value="<?= $story->short_headline ?>">
+                <input type="text" id="short_headline"  name="short_headline" value="<?= $story->short_headline ?>">
+                <div id="short_headline_error" class="error"></div>
             </div>
 
             <div>
                 <label for="sub_heading">Sub-heading</label>
-                <input type="text" name="sub_heading" value="<?= $story->sub_heading ?>">
+                <input type="text" id="sub_heading"  name="sub_heading" value="<?= $story->sub_heading ?>">
+                <div id="sub_heading_error" class="error"></div>
             </div>
             <div>
                 <label for="main_story">Main Story</label>
-                <textarea name="main_story" cols="30" rows="10"><?= $story->main_story ?></textarea>
+                <textarea id="main_story"  name="main_story" cols="30" rows="10"><?= $story->main_story ?></textarea>
+                <div id="main_story_error" class="error"></div>
             </div>
             <div>
                 <label for="summary">Summary</label>
-                <textarea name="summary" cols="30" rows="10"><?= $story->summary ?></textarea>
+                <textarea id="summary"  name="summary" cols="30" rows="10"><?= $story->summary ?></textarea>
+                <div id="summary_error" class="error"></div>
             </div>
             <div>
                 <label for="">Date</label>
-                <input type="date" name="date" value="<?= $story->date ?>">
+                <input type="date" id="date"  name="date" value="<?= $story->date ?>">
+                <div id="date_error" class="error"></div>
             </div>
             <div>
                 <label for="">Time</label>
-                <input type="time" name="time" value="<?= $story->time ?>">
+                <input type="time" id="time"  name="time" value="<?= $story->time ?>">
+                <div id="time_error" class="error"></div>
             </div>
             <div>
                 <label for="">Author</label>
-                <select name="author_id">
+                <select  id="author_id" name="author_id">
 
                     <?php foreach ($authors as $author) { ?>
-                        <option value="<?= $author->id ?>" <?php if ($author === $author->id) echo "selected" ?>><?= $author->first_name ?> <?= $author->last_name ?></option>
+                        <option value="<?= $author->id ?>" <?php if ($story->author_id === $author->id) echo "selected" ?>><?= $author->first_name ?> <?= $author->last_name ?></option>
                     <?php } ?>
 
                 </select>
+                <div id="author_id_error" class="error"></div>
             </div>
             <div>
                 <label for="">Category</label>
-                <select name="category_id">
+                <select  id="category_id" name="category_id">
 
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                        <option value="<?= $category->id ?>" <?php if ($story->category_id === $category->id) echo "selected" ?>> <?= $category->name ?></option>
                     <?php } ?>
 
                 </select>
+                <div id="category_id_error" class="error"></div>
             </div>
 
+            
             <div>
-                <a href="edit_story.php?id=<?= $story->id; ?>"><input type="submit"></a>
-                <a href="index.php"><button>Cancel</button></a>
+                <button id="submit_btn" class="btn_prime"><input type="submit"><a href="edit_story.php?id=<?= $story->id;?>"></a></button>
+                <button> <a href="index.php">Cancel</a></button>
+
+                <!-- <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="edit_story.php">Submit</button>
+                <button class="button-2" role="button"><a href="index.php">Cancel</a></button> -->
             </div>
+
+            <!-- <div>
+                <button class="btn_prime" type="submit"><a href="edit_story.php">Edit</a></button>
+                <button> <a href="index.php">Cancel</a></button>
+            </div> -->
 
     </div>
 
@@ -116,7 +134,7 @@ try {
     <footer class="footer">
         <p>&copy; 2022, all rights reserved.</p>
     </footer>
-    <script src="js/patient_validate.js"></script>
+    <script src="js/validate_story.js"></script>
 </body>
 
 </html>

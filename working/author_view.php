@@ -45,8 +45,7 @@ try {
 
 <body>
   <!-- TITLE AND NAVBAR -->
-  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-  include($IPATH . "nav.html"); ?>
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?> 
 
   <div class="container">
     <div class="width-8">

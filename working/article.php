@@ -12,7 +12,7 @@ try {
   //  by ID, avoid doubles in side categories
   //  same category as current story
 
-  
+
   $relatedStories = Get::byCategoryOrderBy($category->name, 'date ASC', 4);
   // $otherStories = ??
 } catch (Exception $e) {
@@ -46,16 +46,17 @@ try {
 
 <body>
 
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+  <!-- TITLE AND NAVBAR -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "nav.html"); ?>
 
   <div class="container">
     <div class="width-8">
       <!-- main story -->
       <div class="story">
-        <!-- <div class="width-12 tag">
+        <div class="width-12 tag">
           <p><?= $category->name; ?></p>
-        </div> -->
+        </div>
 
         <div class="width-6 viewArticle">
           <h1 class="mb-1"><?= $story->headline ?></h1>
@@ -68,8 +69,9 @@ try {
         </div>
       </div>
 
-      <button><a href="edit_story_form.php?id=<?= $story->id; ?>">Edit</a></button>
-      <button class="btn_delete"><a href="delete_story_form.php?id=<?= $story->id; ?>">Delete</a></button>
+      <button class="btn_prime"><a href="edit_story_form.php?id=<?= $story->id; ?>">Edit</a></button>
+      <button><a href="delete_story_form.php?id=<?= $story->id; ?>">Delete</a></button>
+
     </div>
 
     <div class="width-1"></div>

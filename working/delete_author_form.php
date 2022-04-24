@@ -42,8 +42,7 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-    include($IPATH . "nav.html"); ?>
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?> 
 
     <div class="main">
 
@@ -69,8 +68,9 @@ try {
             </div>
 
             <div>
-                <a href="delete_author.php?id=<?= $author->id; ?>"><input type="submit"></a>
-                <a href="author_view_all.php"><button>Cancel</button> </a>
+                <!-- <a href="delete_author.php?id=<?= $author->id; ?>"><input type="submit"></a> -->
+                <button class="btn_prime" type="submit" formaction="delete_author.php?id=<?= $author->id; ?>">Delete</button>
+                <button formaction="author_view_all.php">Cancel</button>
             </div>
 
     </div>

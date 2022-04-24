@@ -13,7 +13,7 @@ try {
   // $events = Get::all('events', 6);
 
   $lifeStories = Get::byCategory('Life', 4);
-  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 4);
+  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -45,7 +45,7 @@ try {
 <body>
 
  <!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?>
 
 
   <div class="container">
@@ -70,35 +70,12 @@ try {
           </div>
         <?php  } ?>
       </div>
-      <!-- 2nd headline only category -->
-
-      <div class="mb-1">
-        <div class="eventTag tag">
-          <p>Upcoming Events</p>
-        </div>
-
-        <!-- <div class="story">
-        <div class="tag">
-          <p>Upcoming Events</p>
-        </div>
-        </div> -->
-
-        <?php foreach ($stageStories as $stageStory) {
-          $category = GET::byId('categories', $stageStory->category_id);
-          $author = GET::byId('authors', $stageStory->author_id);    ?>
-          <div class="story">
-            <!-- <div class="tag">
-            <p><?= $category->name; ?></p>
-          </div> -->
-            <h3><a href="article.php?id=<?= $stageStory->id ?>"><?= $stageStory->short_headline; ?></a></h3>
-            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $stageStory->date; ?></h5>
-          </div>
-
-        <?php  } ?>
-      </div>
     </div>
+
+
     <!-- Middle - main stories -->
     <div class="width-6">
+      
       <!-- main story -->
       <?php
       $category = GET::byId('categories', $headlineStories[0]->category_id);

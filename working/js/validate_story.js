@@ -1,7 +1,6 @@
 // Get input fields
 let submitBtn = document.getElementById('submit_btn');
 
-// story
 let headlineInput = document.getElementById('headline');
 let short_headlineInput = document.getElementById('short_headline');
 let sub_headingInput = document.getElementById('sub_heading');
@@ -16,7 +15,6 @@ let category_idInput = document.getElementById('category_id');
 
 // Get error divs
 
-// story
 let headlineError = document.getElementById('headline_error');
 let short_headlineError = document.getElementById('short_headline_error');
 let sub_headingError = document.getElementById('sub_heading_error');
@@ -68,14 +66,14 @@ function resetValues() {
 
 
         headlineError.innerHTML = "";
-        // short_headlineError.innerHTML = "";
-        // sub_headingError.innerHTML = "";
-        // summaryError.innerHTML = "";
-        // main_storyError.innerHTML = "";
-        // dateError.innerHTML = "";
-        // timeError.innerHTML = "";
-        // author_idError.innerHTML = "";
-        // category_idError.innerHTML = "";
+        short_headlineError.innerHTML = "";
+        sub_headingError.innerHTML = "";
+        summaryError.innerHTML = "";
+        main_storyError.innerHTML = "";
+        dateError.innerHTML = "";
+        timeError.innerHTML = "";
+        author_idError.innerHTML = "";
+        category_idError.innerHTML = "";
 
 }
 
@@ -128,30 +126,30 @@ function onSubmitForm(evt) {
         showError(main_storyError, "JS Only letters and spaces are allowed.");
     }
 
-    // if (dateInput.value === "") {
-    //     showError(dateError, "JS The date field is required.");
-    // }
+    if (dateInput.value === "") {
+        showError(dateError, "JS The date field is required.");
+    }
     // else if (!regexValid(DATE_REGEX, dateInput.value)) {
     //     showError(dateError, "JS Only letters and spaces are allowed.");
     // }
 
-    // if (timeInput.value === "") {
-    //     showError(timeError, "JS The time field is required.");
-    // }
+    if (timeInput.value === "") {
+        showError(timeError, "JS The time field is required.");
+    }
     // else if (!regexValid(DATE_REGEX, timeInput.value)) {
     //     showError(timeError, "JS Only letters and spaces are allowed.");
     // }
 
-    // if (author_idInput.value === "") {
-    //     showError(author_idError, "JS The main-story field is required.");
-    // }
+    if (author_idInput.value === "") {
+        showError(author_idError, "JS The main-story field is required.");
+    }
     // else if (!regexValid(PHONE_REGEX, author_idInput.value)) {
     //     showError(author_idError, "JS Only letters and spaces are allowed.");
     // }
 
-    // if (category_idInput.value === "") {
-    //     showError(category_idError, "JS The main-story field is required.");
-    // }
+    if (category_idInput.value === "") {
+        showError(category_idError, "JS The main-story field is required.");
+    }
     // else if (!regexValid(PHONE_REGEX, category_idInput.value)) {
     //     showError(category_idError, "JS Only letters and spaces are allowed.");
     // }

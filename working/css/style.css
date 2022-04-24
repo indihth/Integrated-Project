@@ -64,10 +64,10 @@ select {
 }
 
 input[type=submit],
-button {
+button{
     width: auto;
+    background-color: #bbbbbb;
 
-    background-color: #8d8d8d;
     color: white;
     padding: 10px 20px;
     margin: 8px 0;
@@ -76,21 +76,19 @@ button {
     cursor: pointer;
 }
 
-button {
-    background-color: #bebebe;
-}
+/* button {
+    background-color: #b4b4b4;
+} */
 
 button:hover {
     background-color: #acacac;
 }
 
-.btn_delete {
-    background-color: #666666;
+.btn_prime {
+    background-color: #949494;
 }
 
-input[type=submit]:hover {
-    background-color: #636363;
-}
+/* s */
 
 /* ////////////////////////////////// */
 /* NAVBAR */

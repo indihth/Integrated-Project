@@ -42,7 +42,7 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
     include($IPATH . "nav.html"); ?>
 
     <div class="main">
@@ -72,8 +72,10 @@ try {
                 <div id="link_error" class="error"></div>
             </div>
 
-            <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
-            <button><a href="author_view_all.php">Cancel</a></button>
+            <!-- <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
+            <button><a href="author_view_all.php">Cancel</a></button> -->
+            <button  id="submit_btn" class="btn_prime" type="submit" formaction="edit_author.php">Edit</button>
+            <button formaction="author_view_all.php">Cancel</button>
 
     </div>
 

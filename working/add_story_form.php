@@ -45,7 +45,7 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
     include($IPATH . "nav.html"); ?>
 
     <div class="main">
@@ -56,31 +56,33 @@ try {
 
             <label for="headline">Headline</label>
             <!-- use NAME to put value into POST -->
-            <input type="text" id="headline" name="headline" value="<?php if (isset($data["headline"])) echo $data["headline"];?>">
+            <input type="text" id="headline" name="headline" value="<?php if (isset($data["headline"])) echo $data["headline"]; ?>">
 
             <div id="headline_error" class="error"><?php if (isset($errors["headline"])) echo $errors["headline"]; ?></div>
 
             <label for="">Short headline</label>
-            <input id="short_headline" type="text" name="short_headline" value="<?php if (isset($data["short_headline"])) echo $data["short_headline"];?>">
+            <input id="short_headline" type="text" name="short_headline" value="<?php if (isset($data["short_headline"])) echo $data["short_headline"]; ?>">
             <div id="short_headline_error" class="error"><?php if (isset($errors["short_headline"])) echo $errors["short_headline"]; ?></div>
 
             <label for="">Sub-heading</label>
-            <input id="sub_heading"  type="text" name="sub_heading" value="<?php if (isset($data["sub_heading"])) echo $data["sub_heading"];?>">
+            <input id="sub_heading" type="text" name="sub_heading" value="<?php if (isset($data["sub_heading"])) echo $data["sub_heading"]; ?>">
             <div id="sub_heading_error" class="error"><?php if (isset($errors["sub_heading"])) echo $errors["sub_heading"]; ?></div>
 
             <label for="">Summary</label>
-            <textarea id="summary" name="summary" cols="30" rows="10" value="<?php if (isset($data["summary"])) echo $data["summary"];?>"></textarea>
+            <textarea id="summary" name="summary" cols="30" rows="10" value="<?php if (isset($data["summary"])) echo $data["summary"]; ?>"></textarea>
             <div id="summary_error" class="error"><?php if (isset($errors["summary"])) echo $errors["summary"]; ?></div>
 
             <label for="">Main Story</label>
-            <textarea id="main_story" name="main_story" cols="30" rows="10" value="<?php if (isset($data["main_story"])) echo $data["main_story"];?>"></textarea>
+            <textarea id="main_story" name="main_story" cols="30" rows="10" value="<?php if (isset($data["main_story"])) echo $data["main_story"]; ?>"></textarea>
             <div id="main_story_error" class="error"><?php if (isset($errors["main_story"])) echo $errors["main_story"]; ?></div>
 
             <label for="">Date</label>
-            <input id="date" type="date" name="date" value="<?php if (isset($data["date"])) echo $data["date"];?>">
+            <input id="date" type="date" name="date" value="<?php if (isset($data["date"])) echo $data["date"]; ?>">
+            <div id="date_error" class="error"><?php if (isset($errors["date"])) echo $errors["date"]; ?></div>
 
             <label for="">Time</label>
-            <input id="time" type="time" name="time" value="<?php if (isset($data["time"])) echo $data["time"];?>">
+            <input id="time" type="time" name="time" value="<?php if (isset($data["time"])) echo $data["time"]; ?>">
+            <div id="time_error" class="error"><?php if (isset($errors["time"])) echo $errors["time"]; ?></div>
 
             <label for="">Author</label>
             <select id="author_id" name="author_id">
@@ -90,6 +92,7 @@ try {
                 <?php } ?>
 
             </select>
+            <div id="author_id_error" class="error"><?php if (isset($errors["author_id"])) echo $errors["author_id"]; ?></div>
 
             <label for="">Category</label>
             <select id="category_id" name="category_id">
@@ -99,10 +102,11 @@ try {
                 <?php } ?>
 
             </select>
+            <div id="category_id_error" class="error"><?php if (isset($errors["category_id"])) echo $errors["category_id"]; ?></div>
 
             <div>
-                <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_story.php">Submit</button>
-                <button class="button-2" role="button"><a href="index.php">Cancel</a></button>
+                <button id="submit_btn" class="btn_prime" type="submit" formaction="edit_author.php">Submit</button>
+                <button formaction="index.php">Cancel</button>
             </div>
 
             <!-- <div>
@@ -124,8 +128,8 @@ try {
 
 <!-- if page left, clear the data -move to different page then return to no data- -->
 <?php
-        if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
-            unset($_SESSION["data"]);
-            unset($_SESSION["errors"]);
-        }
-        ?>
+if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
+    unset($_SESSION["data"]);
+    unset($_SESSION["errors"]);
+}
+?>

@@ -53,8 +53,7 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-    include($IPATH . "nav.html"); ?>
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/server_validation/assets/"; include($IPATH."nav.html"); ?>
 
     <div class="main">
 
