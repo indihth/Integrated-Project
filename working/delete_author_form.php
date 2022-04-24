@@ -3,7 +3,7 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-    $author = Get::byId('authors', $_GET['id']);
+    $author = Get::byId('authors', $_GET["id"]);
 
     // $story = Get::byId('stories', $_GET["id"]);
     // $author = Get::byId('authors', $author->author_id);
@@ -48,32 +48,30 @@ try {
     <div class="main">
 
         <!-- important POST method -->
-        <form method="POST" action="edit_author.php" class="form center">
-            <h2>Edit Author</h2>
+        <form method="POST" action="delete_author.php" class="form center">
+            <h2>Delete Author</h2>
 
             <input type="hidden" name="id" value="<?= $author->id ?>">
 
             <div>
                 <label for="">First Name</label>
                 <!-- use NAME to put value into POST -->
-                <input type="text" id="first_name" name="first_name" value="<?= $author->first_name ?>">
-                <!-- checking if there's an error then printing it out -->
-                <div id="first_name_error" class="error"></div>
+                <input type="text" name="first_name" value="<?= $author->first_name ?>" disabled>
             </div>
 
             <div>
                 <label for="">Last Name</label>
-                <input type="text" id="last_name" name="last_name" value="<?= $author->last_name ?>">
-                <div id="last_name_error" class="error"></div>
+                <input type="text" name="last_name" value="<?= $author->last_name ?>" disabled>
             </div>
             <div>
                 <label for="">Link</label>
-                <input type="url" id="link" name="link" value="<?= $author->link ?>">
-                <div id="link_error" class="error"></div>
+                <input type="text" name="link" value="<?= $author->link ?>" disabled>
             </div>
 
-            <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
-            <button><a href="author_view_all.php">Cancel</a></button>
+            <div>
+                <a href="delete_author.php?id=<?= $author->id; ?>"><input type="submit"></a>
+                <a href="author_view_all.php"><button>Cancel</button> </a>
+            </div>
 
     </div>
 
@@ -83,7 +81,7 @@ try {
     <footer class="footer">
         <p>&copy; 2022, all rights reserved.</p>
     </footer>
-    <script src="js/validate.js"></script>
+    <!-- <script src="js/patient_validate.js"></script> -->
 </body>
 
 </html>

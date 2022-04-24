@@ -3,18 +3,17 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-  $story = Get::byId('stories', $_GET["id"]);
-  $author = Get::byId('authors', $story->author_id);
-  $category = Get::byId('categories', $story->category_id);
+  $author = Get::byId('authors', $_GET["id"]);
+  $stories = Get::byAuthor($_GET["id"], 'ASC', 2);
+
+  // $stories = Get::('stories', $)
 
 
   //  write statement to check if any stories have already been used
   //  by ID, avoid doubles in side categories
-  //  same category as current story
 
-  
-  $relatedStories = Get::byCategoryOrderBy($category->name, 'date ASC', 4);
-  // $otherStories = ??
+  $lifeStories = Get::byCategory('Life', 4);
+  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -45,33 +44,34 @@ try {
 </head>
 
 <body>
-
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/assets/"; include($IPATH."nav.html"); ?>
+  <!-- TITLE AND NAVBAR -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
+  include($IPATH . "nav.html"); ?>
 
   <div class="container">
     <div class="width-8">
-      <!-- main story -->
-      <div class="story">
-        <!-- <div class="width-12 tag">
-          <p><?= $category->name; ?></p>
-        </div> -->
 
-        <div class="width-6 viewArticle">
-          <h1 class="mb-1"><?= $story->headline ?></h1>
-          <h4 class="mb-1"><?= $story->short_headline ?></h4>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $story->date ?></h5>
-        </div>
+      <div>
+        <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
 
-        <div class="width-6 viewArticle">
-          <p><?= $story->main_story ?></p>
-        </div>
+        <button> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button>
+
+        <button><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
       </div>
 
-      <a href="edit_story_form.php?id=<?= $story->id; ?>">Edit</a>
-      <a href="delete_story_form.php?id=<?= $story->id; ?>">Delete</a>
-    </div>
+      <?php foreach ($stories as $story) {
+        $category = GET::byId('categories', $story->category_id);
+        $author = GET::byId('authors', $story->author_id);    ?>
+        <div class="story">
+          <h3><a href="article.php?id=<?= $story->id ?>"><?= $story->short_headline; ?></a></h3>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $story->date; ?></h5>
+        </div>
 
+      <?php  } ?>
+
+      </tbody>
+      </table>
+    </div>
     <div class="width-1"></div>
 
     <!-- Right - mini stories -->
@@ -83,16 +83,17 @@ try {
       <!-- <div class="heading story">
       <p><span>trending</span> </p>
     </div> -->
-      <?php foreach ($relatedStories as $relatedStory) {
-        $category = GET::byId('categories', $relatedStory->category_id);
-        $author = GET::byId('authors', $relatedStory->author_id);    ?>
+      <?php foreach ($stageStories as $stageStory) {
+        $category = GET::byId('categories', $stageStory->category_id);
+        $author = GET::byId('authors', $stageStory->author_id);    ?>
         <div class="story">
-          <h3><a href="article.php?id=<?= $relatedStory->id ?>"><?= $relatedStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $relatedStory->date; ?></h5>
+          <h3><a href="article.php?id=<?= $stageStory->id ?>"><?= $stageStory->short_headline; ?></a></h3>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $stageStory->date; ?></h5>
         </div>
 
       <?php  } ?>
     </div>
+    <script src="js/patient_validate.js"></script>
 </body>
 
 </html>
