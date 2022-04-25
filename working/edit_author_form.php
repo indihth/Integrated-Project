@@ -3,7 +3,7 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-    $author = Get::byId('authors', $_GET['id']);
+    $author = Get::byId('authors', $_GET["id"]);
 
     // $story = Get::byId('stories', $_GET["id"]);
     // $author = Get::byId('authors', $author->author_id);
@@ -74,7 +74,7 @@ try {
 
             <!-- <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
             <button><a href="author_view_all.php">Cancel</a></button> -->
-            <button  id="submit_btn" class="btn_prime" type="submit" formaction="edit_author.php">Edit</button>
+            <button  id="submit_btn" class="btn_prime" type="submit"> Edit</button>
             <button formaction="author_view_all.php">Cancel</button>
 
     </div>

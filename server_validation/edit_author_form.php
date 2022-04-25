@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/DBConnector.php';
+require_once "include/database_connection.php";
 
 session_start();
 
@@ -11,14 +12,28 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
 
     try {
 
-        $author = Get::byId('authors', $_GET['id']);
+        $params = array(
+            'id' => $_POST['id']
+        );
+        $sql = 'SELECT * FROM authors WHERE id = :id';
+
+        $stmt = $connection->prepare($sql);
+        $success = $stmt->execute($params);
+        if (!$success) {
+            throw new Exception("Failed to retrieve author");
+        }
+        else {
+            $data = $stmt->fetch();
+        }
+
+        // $author = Get::byId('authors', $_GET['id']);
        
-        $data = [
-            // "id" => $story->id,
-            "first_name" => $author->first_name,
-            "last_name" => $author->last_name,
-            "link" => $author->link
-        ];
+        // $data = [
+        //     // "id" => $story->id,
+        //     "first_name" => $author->first_name,
+        //     "last_name" => $author->last_name,
+        //     "link" => $author->link
+        // ];
 
         // $story = Get::byId('stories', $_GET["id"]);
         // $author = Get::byId('authors', $author->author_id);
@@ -28,12 +43,15 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
         // $categories = Get::all('categories');
         // $authors = Get::all('authors');
 
-    } catch (Exception $e) {
+    } 
+    catch (Exception $e) {
         die("Exception: " . $e->getMessage());
     }
 
     $errors = [];
 }
+
+$connection = null;
 
 echo "<pre>\$data = ";
 print_r($data);

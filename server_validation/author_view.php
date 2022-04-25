@@ -1,22 +1,57 @@
 <?php
 require_once 'classes/DBConnector.php';
 
+require_once "include/database_connection.php";
+
 try {
 
-  $author = Get::byId('authors', $_GET["id"]);
-  $stories = Get::byAuthor($_GET["id"], 'ASC', 2);
+    $stories = Get::byAuthor($_GET["id"], 'ASC', 2);
+    $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
 
-  // $stories = Get::('stories', $)
+    $params = [
+        "id" => $_GET['id']
+    ];
+    
+    $sql = "SELECT * FROM `authors` WHERE id = :id";
+    
+    // $patient_id = $_GET["id"];
 
 
-  //  write statement to check if any stories have already been used
-  //  by ID, avoid doubles in side categories
+    $stmt = $connection->prepare($sql);
+    $success = $stmt->execute($params);     //will throw error if sql is being injected, attacks
 
-  $lifeStories = Get::byCategory('Life', 4);
-  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
-} catch (Exception $e) {
-  die("Exception: " . $e->getMessage());
+    if(!$success) {
+        throw new Exception("Could not retrieve the selected author");
+    }
+    else {
+        $data = $stmt->fetch();
+    }
+
 }
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+// echo "<pre>\$data = ";
+// print_r($data);
+// echo "<pre>";
+
+// try {
+
+//   $author = Get::byId('authors', $_GET["id"]);
+//   $stories = Get::byAuthor($_GET["id"], 'ASC', 2);
+
+//   // $stories = Get::('stories', $)
+
+
+//   //  write statement to check if any stories have already been used
+//   //  by ID, avoid doubles in side categories
+
+//   $lifeStories = Get::byCategory('Life', 4);
+//   $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
+// } catch (Exception $e) {
+//   die("Exception: " . $e->getMessage());
+// }
 
 ?>
 
@@ -51,11 +86,19 @@ try {
     <div class="width-8">
 
       <div>
-        <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
+        <h1 class="mt-1 mb-1"><?= $data["first_name"], $data["last_name"] ?></h1>
 
-        <button class="button-2" role="button"> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button>
+        <!-- <button class="button-2" role="button"> <a href="edit_author_form.php?id=<?= $data["id"]; ?>">Edit Author</a></button>
 
-        <button class="button-2"><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
+        <button class="button-2"><a href="delete_author_form.php?id=<?= $data["id"] ?>">Delete Author</a></button> -->
+      <form method="post">
+            <div class="mt-1 buttons">
+                <button type="submit" class="button-2" formaction="edit_author_form.php">Update</button>
+                <button type="submit" class="button-2" formaction="delete_author_form.php">Delete</button>
+            </div>
+            <!-- needed for passing id into the update form -->
+            <input type="hidden" name="id" value="<?= $data["id"] ?>">
+        </form>
       </div>
 
       <?php foreach ($stories as $story) {
@@ -63,7 +106,7 @@ try {
         $author = GET::byId('authors', $story->author_id);    ?>
         <div class="story">
           <h3><a href="article.php?id=<?= $story->id ?>"><?= $story->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $story->date; ?></h5>
+          <h5><span><?= $data["first_name"] ?> <?= $data["last_name"]?></span> - <?= $story->date; ?></h5>
         </div>
 
       <?php  } ?>
@@ -87,12 +130,12 @@ try {
         $author = GET::byId('authors', $stageStory->author_id);    ?>
         <div class="story">
           <h3><a href="article.php?id=<?= $stageStory->id ?>"><?= $stageStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $stageStory->date; ?></h5>
+          <h5><span><?= $data["first_name"] ?> <?= $data["last_name"]?></span> - <?= $stageStory->date; ?></h5>
         </div>
 
       <?php  } ?>
     </div>
-    <script src="js/patient_validate.js"></script>
+    <script src="js/patientvalidate_author.js"></script>
 </body>
 
 </html>

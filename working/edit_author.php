@@ -3,26 +3,26 @@ require_once 'classes/DBConnector.php';
 require_once "include/validate_author.php";
 
 
-[$author, $errors] = author_validate($_POST);
+// [$author, $errors] = author_validate($_POST);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  echo "Process request!!";
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//   echo "Process request!!";
 
-  echo "<pre>\$_POST = ";
-  print_r($_POST);
-  echo "</pre>";
+//   echo "<pre>\$_POST = ";
+//   print_r($_POST);
+//   echo "</pre>";
 
-  [$author, $errors] = author_validate($_POST);
+//   [$author, $errors] = author_validate($_POST);
 
-  if (empty($errors)) {
+//   if (empty($errors)) {
 
-    echo "<pre>\$author = ";
-    print_r($author);
-    echo "<pre>";
+//     echo "<pre>\$author = ";
+//     print_r($author);
+//     echo "<pre>";
 
-    echo "<pre>\$errors = ";
-    print_r($errors);
-    echo "<pre>";
+//     echo "<pre>\$errors = ";
+//     print_r($errors);
+//     echo "<pre>";
 
     try {
 
@@ -39,13 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       die("Exception: " . $e->getMessage());
     }
     header("Location: author_view_all.php");
-  } else {
-    session_start();
-    $_SESSION["data"] = $author;
-    $_SESSION["errors"] = $errors;
-    header("Location: edit_author_form.php");
-  }
-} else {
-  //returns error page on GET request
-  http_response_code(405);
-}
+//  else {
+//     session_start();
+//     $_SESSION["data"] = $author;
+//     $_SESSION["errors"] = $errors;
+//     header("Location: edit_author_form.php");
+//   }
+// } else {
+//   //returns error page on GET request
+//   http_response_code(405);
+// }

@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/DBConnector.php';
+require_once "include/database_connection.php";
 
 session_start();
 
@@ -128,7 +129,7 @@ echo "<pre>";
         <form method="POST" action="edit_story.php" class="form center">
             <h2>Edit Story</h2>
 
-            <input type="hidden" name="id" value="<?= $story->id; ?>">
+            <input type="hidden" name="id" value="<?= $story->id ?>">
 
             <label for="headline">Headline</label>
             <!-- use NAME to put value into POST -->

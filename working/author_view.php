@@ -45,17 +45,19 @@ try {
 
 <body>
   <!-- TITLE AND NAVBAR -->
-  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?> 
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "nav.html"); ?>
 
   <div class="container">
     <div class="width-8">
 
       <div>
         <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
-
-        <button> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button>
-
-        <button><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
+        <form>
+          <button> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button> 
+          <button><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
+       
+        </form>
       </div>
 
       <?php foreach ($stories as $story) {
