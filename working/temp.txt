@@ -1,5 +1,0 @@
-note css
-
-tag 3 pixels
-
-view authors page / list authrs in left, content middle
