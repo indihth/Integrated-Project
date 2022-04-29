@@ -12,36 +12,36 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
 
     try {
 
-        $params = array(
-            'id' => $_POST['id']
-        );
-        $sql = 'SELECT * FROM authors WHERE id = :id';
+        // $params = array(
+        //     'id' => $_POST["id"]
+        // );
+        // $sql = 'SELECT * FROM authors WHERE id = :id';
 
-        $stmt = $connection->prepare($sql);
-        $success = $stmt->execute($params);
-        if (!$success) {
-            throw new Exception("Failed to retrieve author");
-        }
-        else {
-            $data = $stmt->fetch();
-        }
+        // $stmt = $connection->prepare($sql);
+        // $success = $stmt->execute($params);
+        // if (!$success) {
+        //     throw new Exception("Failed to retrieve author");
+        // }
+        // else {
+        //     $data = $stmt->fetch();
+        // }
 
-        // $author = Get::byId('authors', $_GET['id']);
+        $author = Get::byId('authors', $_POST['id']);
+        $story = Get::byId('stories', $_POST['id']);
+        $author = Get::byId('authors', $author->id);
        
-        // $data = [
-        //     // "id" => $story->id,
-        //     "first_name" => $author->first_name,
-        //     "last_name" => $author->last_name,
-        //     "link" => $author->link
-        // ];
+        $data = [
+            // "id" => $story->id,
+            "first_name" => $author->first_name,
+            "last_name" => $author->last_name,
+            "link" => $author->link
+        ];
 
-        // $story = Get::byId('stories', $_GET["id"]);
-        // $author = Get::byId('authors', $author->author_id);
         // $category = Get::byId('categories', $story->category_id);
 
 
-        // $categories = Get::all('categories');
-        // $authors = Get::all('authors');
+        $categories = Get::all('categories');
+        $authors = Get::all('authors');
 
     } 
     catch (Exception $e) {
@@ -52,6 +52,10 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
 }
 
 $connection = null;
+
+echo "<pre>\$_POST = ";
+print_r($_POST);
+echo "<pre>";
 
 echo "<pre>\$data = ";
 print_r($data);
@@ -88,13 +92,36 @@ echo "<pre>";
     <div class="main">
 
         <!-- important POST method -->
-        <form method="POST" action="edit_author.php" class="form center">
+
+        <form method="POST" action="add_author.php" class="form center">
+            <h2>Add Author</h2>
+
+            <label for="first_name">First Name</label>
+            <!-- use NAME to put value into POST -->
+            <input type="text" id="first_name" name="first_name" value="<?php if (isset($data["first_name"])) echo $data["first_name"]; ?>">
+            <div id="first_name_error" class="error"><?php if (isset($errors["first_name"])) echo $errors["first_name"]; ?></div>
+
+            <label for="">Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="<?php if (isset($data["last_name"])) echo $data["last_name"]; ?>">
+            <div id="last_name_error" class="error"><?php if (isset($errors["last_name"])) echo $errors["last_name"]; ?></div>
+
+            <label for="">Link</label>
+            <input type="text" id="link" name="link" value="<?php if (isset($data["link"])) echo $data["link"]; ?>">
+            <div id="link_error" class="error"><?php if (isset($errors["link"])) echo $errors["link"]; ?></div>
+
+            <div>
+                <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="edit_author.php">Submit</button>
+                <button class="button-2" role="button"><a href="author_view_all.php">Cancel</a></button>
+            </div>
+
+        </form>
+       <!-- <form method="POST" action="edit_author.php" class="form center">
             <h2>Edit Author</h2>
 
             <input type="hidden" name="id" value="<?= $author->id; ?>">
 
             <label for="first_name">First Name</label>
-            <!-- use NAME to put value into POST -->
+            use NAME to put value into POST
             <input type="text" id="first_name" name="first_name" value="<?php if (isset($data["first_name"])) echo $data["first_name"]; ?>">
             <div id="first_name_error" class="error"><?php if (isset($errors["first_name"])) echo $errors["first_name"]; ?></div>
 
@@ -112,7 +139,7 @@ echo "<pre>";
             </div>
     </div>
 
-    </form>
+    </form>  -->
     </div>
 
     <footer class="footer">

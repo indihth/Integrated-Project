@@ -50,7 +50,8 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/server_validation/assets/"; include($IPATH."nav.html"); ?>
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/server_validation/assets/";
+    include($IPATH . "nav.html"); ?>
     <div class="main">
 
         <!-- important POST method -->
@@ -74,9 +75,9 @@ if (isset($_SESSION["data"])  and isset($_SESSION["errors"])) {
                 <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="add_author.php">Submit</button>
                 <button class="button-2" role="button"><a href="index.php">Cancel</a></button>
             </div>
-    </div>
 
-    </form>
+        </form>
+    </div>
 
     <footer class="footer">
         <p>&copy; 2022, all rights reserved.</p>

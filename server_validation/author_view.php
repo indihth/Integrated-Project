@@ -83,14 +83,37 @@ catch(PDOException $e) {
   <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/server_validation/assets/"; include($IPATH."nav.html"); ?> 
 
   <div class="container">
-    <div class="width-8">
+
+  <div class="width-3">
+      <h1 class="mt-1 mb-1">List of Authors</h1>
+
+      <button  role="button"> <a class="nav-item" href="add_author_form.php">Add Author</a></button>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Names</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+
+          foreach ($authors as $author) {
+            echo "<tr>";
+            echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
+            echo "</tr>";
+          }
+          ?>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="width-6">
 
       <div>
         <h1 class="mt-1 mb-1"><?= $data["first_name"], $data["last_name"] ?></h1>
 
-        <!-- <button class="button-2" role="button"> <a href="edit_author_form.php?id=<?= $data["id"]; ?>">Edit Author</a></button>
-
-        <button class="button-2"><a href="delete_author_form.php?id=<?= $data["id"] ?>">Delete Author</a></button> -->
       <form method="post">
             <div class="mt-1 buttons">
                 <button type="submit" class="button-2" formaction="edit_author_form.php">Update</button>
