@@ -161,12 +161,11 @@ class Get
     }
 
     // added get by author function
-    // didn't see it was already written and commented out below
+    // didn't see something similar was already written and commented out below
     public static function byAuthor($id, $orderBy, $limit = 0, $skip = 0)
     {
 
         $sql = "SELECT * FROM stories WHERE stories.author_id = $id;";
-        // $sql = "SELECT id FROM " . CATEGORIES_TABLE_NAME . " WHERE name = '" . $category . "' LIMIT 1";
         $connection = Connection::getInstance();
         $stmt = $connection->prepare($sql);
         $success = $stmt->execute();
