@@ -46,13 +46,13 @@ try {
 <body>
   <!-- TITLE AND NAVBAR -->
   <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-  include($IPATH . "nav.html"); ?>
+  include($IPATH . "nav.php"); ?>
 
   <div class="container">
     <div class="width-8">
 
       <div>
-        <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
+        <h1 class="mt-1 mb-2"><?= $author->first_name, " ", $author->last_name ?></h1>
         <form method="POST">
           <button class="button-2" role="button" formaction="edit_author_form.php">Edit Author</button>
           <button class="button-2" role="button" formaction="delete_author_form.php">Delete Author</button>
@@ -95,6 +95,11 @@ try {
       <?php  } ?>
     </div>
     <script src="js/patient_validate.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

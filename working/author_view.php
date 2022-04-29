@@ -3,7 +3,8 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-  $author = Get::byId('authors', $_GET["id"]);
+  $viewAuthor = Get::byId('authors', $_GET["id"]);
+  $authors = Get::all('authors');
   $stories = Get::byAuthor($_GET["id"], 'ASC', 2);
 
   // $stories = Get::('stories', $)
@@ -46,20 +47,44 @@ try {
 <body>
   <!-- TITLE AND NAVBAR -->
   <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
-  include($IPATH . "nav.html"); ?>
+  include($IPATH . "nav.php"); ?>
 
   <div class="container">
-    <div class="width-8">
 
+  <div class="width-3">
+      <h2 class="mt-1">List of Authors</h1>
+
+      <!-- <button> <a href="add_author_form.php">Add Author</a></button> -->
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Names</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+
+          foreach ($authors as $author) {
+            echo "<tr>";
+            echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
+            echo "</tr>";
+          }
+          ?>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="width-5 ">
       <div>
-        <h1 class="mt-1 mb-1"><?= $author->first_name, " ", $author->last_name ?></h1>
-        <form>
-          <button> <a href="edit_author_form.php?id=<?= $author->id; ?>">Edit Author</a></button> 
-          <button><a href="delete_author_form.php?id=<?= $author->id; ?>">Delete Author</a></button>
-       
-        </form>
+        <h1 class="mt-1 mb-2"><?= $viewAuthor->first_name, " ", $viewAuthor->last_name ?></h1>
+          <button> <a href="edit_author_form.php?id=<?= $viewAuthor->id; ?>">Edit view Author</a></button> 
+          <button><a href="delete_author_form.php?id=<?= $viewAuthor->id; ?>">Delete Author</a></button>
+          <button > <a href="add_author_form.php">Add Author</a></button>
       </div>
 
+      <div>
       <?php foreach ($stories as $story) {
         $category = GET::byId('categories', $story->category_id);
         $author = GET::byId('authors', $story->author_id);    ?>
@@ -69,9 +94,7 @@ try {
         </div>
 
       <?php  } ?>
-
-      </tbody>
-      </table>
+      </div>
     </div>
     <div class="width-1"></div>
 
@@ -95,6 +118,11 @@ try {
       <?php  } ?>
     </div>
     <script src="js/patient_validate.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

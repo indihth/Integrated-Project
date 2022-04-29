@@ -7,12 +7,51 @@ font-family: 'Raleway', sans-serif; */
 /* ////////////////////////////////// */
 
 .mb-1 {
+    margin-bottom: 10px;
+}
+
+.mb-2 {
     margin-bottom: 15px;
+}
+
+.pt-1 {
+    padding-top: 40px;
 }
 
 .center {
     margin: 0 auto;
 }
+
+.flex {
+    display: flex;
+}
+
+.f__between {
+    justify-content: space-between;
+}
+
+.f__around {
+    justify-content: space-around;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.gap-1 {
+    gap: 10px;
+}
+
+.main {
+    margin: 0 auto;
+    padding-bottom: 100px;
+    width: 85rem;
+}
+
+.container {
+    padding-bottom: 100px;
+}
+
 
 /* ////////////////////////////////// */
 /* FORM */
@@ -64,7 +103,7 @@ select {
 }
 
 input[type=submit],
-button{
+button {
     width: auto;
     background-color: #bbbbbb;
 
@@ -94,7 +133,14 @@ button:hover {
 /* NAVBAR */
 /* ////////////////////////////////// */
 
+nav {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 0px;
+    margin-top: 30px;
+}
 .nav-cont {
+    /* padding-top: 50px; */
     display: flex;
     list-style-type: none;
     justify-content: center;
@@ -104,7 +150,7 @@ button:hover {
 
 .nav-item {
     font-family: 'EB Garamond', serif;
-    padding: .6em 1em;
+    padding: 0.6em 2.5em;
 }
 
 li a:hover {
@@ -117,14 +163,56 @@ li a:hover {
 
 /* ////////////////////////////////// */
 
+/* ////////////////////////////////// */
+/* FOOTER */
+/* ////////////////////////////////// */
+
+footer {
+    margin: 0 auto;
+    /* width: 100rem; */
+}
+
+.footer {
+    background-color: #ededed80;;
+    padding: 60px 0px 20px;
+}
+
+.footer-wrapper {
+    width: 1200px;
+    padding-bottom: 15px;
+}
+
+.footer-items {
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.footer-content {
+    width: 150px;
+    font-size: 14px;
+}
+
+.footer-content>p {
+    margin: 0 0 10px;
+}
+
+.footer-copy {
+    font-size: 14px;
+    border-top: 1px solid #8d8d8d;
+    padding-top: 25px;
+    margin: 10px;
+}
+
+/* ////////////////////////////////// */
+
 
 .header {
     width: 1200px;
-    padding-top: 40px;
+    padding-top: 60px;
     margin: auto;
     text-align: center;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  
 }
 
 .header h1 {
@@ -261,7 +349,7 @@ h5 span {
 .eventTag {
     padding: 10px 40px 0px 0px;
     margin: 11px 0 15px 0;
-    border-bottom: 1px solid #949494;
+    border-bottom: 1px solid #b1b1b1;
     /* border-bottom: 1px solid #D1D1D1;  */
     /* padding: 5px 20px 15px 0px;
     margin-top: 15px;  */

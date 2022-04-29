@@ -3,7 +3,7 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-    $author = Get::byId('authors', $_GET["id"]);
+    $author = Get::byId('authors', $_GET['id']);
 
     // $story = Get::byId('stories', $_GET["id"]);
     // $author = Get::byId('authors', $author->author_id);
@@ -43,7 +43,7 @@ try {
 
     <!-- TITLE AND NAVBAR -->
     <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
-    include($IPATH . "nav.html"); ?>
+    include($IPATH . "nav.php"); ?>
 
     <div class="main">
 
@@ -74,7 +74,7 @@ try {
 
             <!-- <button id="submit_btn" class="button primary" type="submit" formaction="edit_author.php">Submit</button>
             <button><a href="author_view_all.php">Cancel</a></button> -->
-            <button  id="submit_btn" class="btn_prime" type="submit"> Edit</button>
+            <button  id="submit_btn" class="btn_prime" type="submit" formaction="edit_author.php">Edit</button>
             <button formaction="author_view_all.php">Cancel</button>
 
     </div>
@@ -82,10 +82,13 @@ try {
     </form>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2022, all rights reserved.</p>
-    </footer>
+
     <script src="js/validate_author.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

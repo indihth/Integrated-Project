@@ -46,7 +46,7 @@ try {
 
     <!-- TITLE AND NAVBAR -->
     <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
-    include($IPATH . "nav.html"); ?>
+    include($IPATH . "nav.php"); ?>
 
     <div class="main">
 
@@ -118,10 +118,13 @@ try {
     </form>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2022, all rights reserved.</p>
-    </footer>
+
     <script src="js/validate_story.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

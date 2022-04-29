@@ -41,7 +41,7 @@ try {
 
     <!-- TITLE AND NAVBAR -->
     <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
-    include($IPATH . "nav.html"); ?>
+    include($IPATH . "nav.php"); ?>
 
     <div class="main">
 
@@ -114,27 +114,23 @@ try {
 
             
             <div>
-                <button id="submit_btn" class="btn_prime"><input type="submit"><a href="edit_story.php?id=<?= $story->id;?>"></a></button>
+                <!-- <button id="submit_btn" class="btn_prime"><input type="submit"><a href="edit_story.php?id=<?= $story->id;?>"></a></button> -->
+                <button id="submit_btn" class="btn_prime" type="submit" formaction="edit_story.php">Edit</button>
                 <button> <a href="index.php">Cancel</a></button>
-
-                <!-- <button id="submit_btn" class="button-2 submitBtn" type="submit" formaction="edit_story.php">Submit</button>
-                <button class="button-2" role="button"><a href="index.php">Cancel</a></button> -->
             </div>
-
-            <!-- <div>
-                <button class="btn_prime" type="submit"><a href="edit_story.php">Edit</a></button>
-                <button> <a href="index.php">Cancel</a></button>
-            </div> -->
 
     </div>
 
     </form>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2022, all rights reserved.</p>
-    </footer>
+
     <script src="js/validate_story.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

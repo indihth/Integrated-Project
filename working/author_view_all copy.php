@@ -3,18 +3,16 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-  $story = Get::byId('stories', $_GET["id"]);
-  $author = Get::byId('authors', $story->author_id);
-  $category = Get::byId('categories', $story->category_id);
+  // $story = Get::byId('stories', $_GET["id"]);
+  $authors = Get::all('authors');
+  // $category = Get::byId('categories', $story->category_id);
 
 
   //  write statement to check if any stories have already been used
   //  by ID, avoid doubles in side categories
-  //  same category as current story
 
+  $lifeStories = Get::byCategory('Life', 4);
 
-  $relatedStories = Get::byCategoryOrderBy($category->name, 'date ASC', 4);
-  // $otherStories = ??
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -45,35 +43,34 @@ try {
 </head>
 
 <body>
-
-  <!-- TITLE AND NAVBAR -->
-  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
-  include($IPATH . "nav.php"); ?>
+<!-- TITLE AND NAVBAR -->
+<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.php"); ?>
 
   <div class="container">
-    <div class="width-8">
-      <!-- main story -->
-      <div class="story">
-        <div class="width-12 tag">
-          <p><?= $category->name; ?></p>
-        </div>
+    <div class="width-3">
+      <h1 class="mt-1 mb-2">List of Authors</h1>
 
-        <div class="width-6 viewArticle">
-          <h1 class="mb-2"><?= $story->headline ?></h1>
-          <h4 class="mb-2"><?= $story->short_headline ?></h4>
-          <h5><span><a href="author_view.php?id=<?= $author->id;?>"><?= $author->first_name; ?> <?= $author->last_name; ?></a></span> - <?= $story->date ?></h5>
-        </div>
+      <button> <a href="add_author_form.php">Add Author</a></button>
 
-        <div class="width-6 viewArticle">
-          <p><?= $story->main_story ?></p>
-        </div>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Names</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
 
-      <button class="btn_prime"><a href="edit_story_form.php?id=<?= $story->id; ?>">Edit</a></button>
-      <button><a href="delete_story_form.php?id=<?= $story->id; ?>">Delete</a></button>
+          foreach ($authors as $author) {
+            echo "<tr>";
+            echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
+            echo "</tr>";
+          }
+          ?>
 
+        </tbody>
+      </table>
     </div>
-
     <div class="width-1"></div>
 
     <!-- Right - mini stories -->
@@ -85,12 +82,12 @@ try {
       <!-- <div class="heading story">
       <p><span>trending</span> </p>
     </div> -->
-      <?php foreach ($relatedStories as $relatedStory) {
-        $category = GET::byId('categories', $relatedStory->category_id);
-        $author = GET::byId('authors', $relatedStory->author_id);    ?>
+      <?php foreach ($lifeStories as $lifeStory) {
+        $category = GET::byId('categories', $lifeStory->category_id);
+        $author = GET::byId('authors', $lifeStory->author_id);    ?>
         <div class="story">
-          <h3><a href="article.php?id=<?= $relatedStory->id ?>"><?= $relatedStory->short_headline; ?></a></h3>
-          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $relatedStory->date; ?></h5>
+          <h3><a href="article.php?id=<?= $lifeStory->id ?>"><?= $lifeStory->short_headline; ?></a></h3>
+          <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $lifeStory->date; ?></h5>
         </div>
 
       <?php  } ?>

@@ -12,8 +12,8 @@ try {
   // add event table for left headline column
   // $events = Get::all('events', 6);
 
-  $lifeStories = Get::byCategory('Life', 4);
-  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 6);
+  $lifeStories = Get::byCategory('Life', 3);
+  $stageStories = Get::byCategoryOrderBy('Stage', 'date ASC', 8);
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -44,8 +44,9 @@ try {
 
 <body>
 
- <!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?>
+  <!-- TITLE AND NAVBAR -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "nav.php"); ?>
 
 
   <div class="container">
@@ -53,7 +54,7 @@ try {
     <div class="width-3">
 
       <!-- 1st headline only category -->
-      <div class="mb-1">
+      <div class="mb-2">
         <div class="eventTag tag">
           <p>stage</p>
         </div>
@@ -75,7 +76,7 @@ try {
 
     <!-- Middle - main stories -->
     <div class="width-6">
-      
+
       <!-- main story -->
       <?php
       $category = GET::byId('categories', $headlineStories[0]->category_id);
@@ -88,7 +89,7 @@ try {
         </div>
         <h1><a href="article.php?id=<?= $headlineStories[0]->id ?>"><?= $headlineStories[0]->headline; ?></a></h1>
         <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $headlineStories[0]->date; ?></h5>
-        <p><?= substr($headlineStories[0]->main_story, 0, 500);
+        <p><?= substr($headlineStories[0]->main_story, 0, 650);
             echo "...(read more)"; ?></p>
       </div>
 
@@ -110,11 +111,11 @@ try {
     </div>
 
     <!-- Right - mini stories -->
-    <?php foreach ($lifeStories as $lifeStory) {
-      $category = GET::byId('categories', $lifeStory->category_id);
-      $author = GET::byId('authors', $lifeStory->author_id);    ?>
+    <div class="width-3">
+      <?php foreach ($lifeStories as $lifeStory) {
+        $category = GET::byId('categories', $lifeStory->category_id);
+        $author = GET::byId('authors', $lifeStory->author_id);    ?>
 
-      <div class="width-3">
         <div class="story">
           <div class="tag">
             <p><span><?= $category->name; ?></span></p>
@@ -125,7 +126,12 @@ try {
         </div>
 
       <?php  } ?>
-      </div>
+    </div>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

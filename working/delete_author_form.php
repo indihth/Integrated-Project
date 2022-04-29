@@ -42,7 +42,7 @@ try {
 <body>
 
     <!-- TITLE AND NAVBAR -->
-    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?> 
+    <?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.php"); ?> 
 
     <div class="main">
 
@@ -78,10 +78,13 @@ try {
     </form>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2022, all rights reserved.</p>
-    </footer>
+
     <!-- <script src="js/patient_validate.js"></script> -->
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

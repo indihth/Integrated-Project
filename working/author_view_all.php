@@ -3,8 +3,10 @@ require_once 'classes/DBConnector.php';
 
 try {
 
-  // $story = Get::byId('stories', $_GET["id"]);
   $authors = Get::all('authors');
+
+  $viewAuthor = Get::byId('authors', $authors[0]->id);
+  $stories = Get::byAuthor($viewAuthor->id, 'ASC', 2);
   // $category = Get::byId('categories', $story->category_id);
 
 
@@ -12,7 +14,6 @@ try {
   //  by ID, avoid doubles in side categories
 
   $lifeStories = Get::byCategory('Life', 4);
-
 } catch (Exception $e) {
   die("Exception: " . $e->getMessage());
 }
@@ -43,34 +44,57 @@ try {
 </head>
 
 <body>
-<!-- TITLE AND NAVBAR -->
-<?php $IPATH = $_SERVER["DOCUMENT_ROOT"]."/site/working/assets/"; include($IPATH."nav.html"); ?>
+  <!-- TITLE AND NAVBAR -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "nav.php"); ?>
 
   <div class="container">
-    <div class="width-8">
-      <h1 class="mt-1 mb-1">List of Authors</h1>
+    <div class="width-3">
+      <h2 class="mt-1">List of Authors</h1>
 
-      <button> <a href="add_author_form.php">Add Author</a></button>
+        <!-- <button> <a href="add_author_form.php">Add Author</a></button> -->
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Names</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Names</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
 
-          foreach ($authors as $author) {
-            echo "<tr>";
-            echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
-            echo "</tr>";
-          }
-          ?>
+            foreach ($authors as $author) {
+              echo "<tr>";
+              echo "<td><a href='author_view.php?id=" . $author->id . "'>" . $author->first_name . " " . $author->last_name . "</a></td>";
+              echo "</tr>";
+            }
+            ?>
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
     </div>
+
+    <div class="width-5 ">
+      <div>
+        <h1 class="mt-1 mb-2"><?= $viewAuthor->first_name, " ", $viewAuthor->last_name ?></h1>
+          <button> <a href="edit_author_form.php?id=<?= $viewAuthor->id; ?>">Edit Author</a></button>
+          <button><a href="delete_author_form.php?id=<?= $viewAuthor->id; ?>">Delete Author</a></button>
+          <button> <a href="add_author_form.php">Add Author</a></button>
+      </div>
+
+      <div>
+        <?php foreach ($stories as $story) {
+          $category = GET::byId('categories', $story->category_id);
+          $author = GET::byId('authors', $story->author_id);    ?>
+          <div class="story">
+            <h3><a href="article.php?id=<?= $story->id ?>"><?= $story->short_headline; ?></a></h3>
+            <h5><span><?= $author->first_name; ?> <?= $author->last_name; ?></span> - <?= $story->date; ?></h5>
+          </div>
+
+        <?php  } ?>
+      </div>
+    </div>
+
     <div class="width-1"></div>
 
     <!-- Right - mini stories -->
@@ -92,6 +116,11 @@ try {
 
       <?php  } ?>
     </div>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>

@@ -44,7 +44,7 @@ if (isset($_SESSION["data"]) and isset($_SESSION["errors"])) {
 
     <!-- TITLE AND NAVBAR -->
     <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/assets/";
-    include($IPATH . "nav.html"); ?>
+    include($IPATH . "nav.php"); ?>
 
     <div class="main">
 
@@ -83,10 +83,13 @@ if (isset($_SESSION["data"]) and isset($_SESSION["errors"])) {
     </form>
     </div>
 
-    <footer class="footer">
-        <p>&copy; 2022, all rights reserved.</p>
-    </footer>
+
     <script src="js/validate.js"></script>
+  </div>
+  
+  <!-- FOOTER -->
+  <?php $IPATH = $_SERVER["DOCUMENT_ROOT"] . "/site/working/assets/";
+  include($IPATH . "footer.html"); ?>
 </body>
 
 </html>
